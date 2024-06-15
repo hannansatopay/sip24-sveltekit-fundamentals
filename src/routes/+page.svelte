@@ -13,7 +13,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         {#each data.posts as post}
         <div>
-            <img class="w-full" src="https://picsum.photos/600" alt="post">
+            <img class="w-full"  src="https://picsum.photos/600" alt="post">
             <div class="text-sm py-2">
                 <span class="font-bold">{post.username}</span>
                 <span class="text-gray-700">{post.content}</span>
