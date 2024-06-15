@@ -1,6 +1,40 @@
 <script>
-    let files=null;
+    let files = null;
+    let grayscale = false;
 
+    function handleFileChange(event) {
+        files = event.target.files;
+    }
+
+    function toggleGrayscale() {
+        if (files && files.length > 0) {
+            const file = files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.src = e.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    if (grayscale) {
+                        ctx.filter = 'grayscale(0%)';
+                    } else {
+                        ctx.filter = 'grayscale(100%)';
+                    }
+                    ctx.drawImage(img, 0, 0);
+                    canvas.toBlob((blob) => {
+                        const newFile = new File([blob], file.name, { type: file.type });
+                        files = [newFile];
+                    }, file.type);
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+        grayscale = !grayscale;
+    }
 </script>
 
 <header class="bg-white py-4 shadow-md sticky top-0 z-10">
@@ -10,18 +44,28 @@
     </div>
 </header>
 
-<form class="container mx-auto p-5" action="">
-    <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50"> 
+<form class="container mx-auto p-5" method="POST" enctype="multipart/form-data">
+    <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
         <div class="flex flex-col items-center justify-center pt-5 pb-6">
             {#if files && files.length}
             <p class="text-sm text-gray-500 font-semibold">{files[0].name}</p>
+            <img 
+                src={URL.createObjectURL(files[0])} 
+                alt="preview" 
+                class="max-w-full max-h-full {grayscale ? 'filter-grayscale' : ''}" 
+            />
             {:else}
             <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/></svg>
             <p class="text-sm text-gray-500 font-semibold">Click to upload</p>
             {/if}
         </div>
-        <input bind:files name="image" id="dropzone" type="file" accept="image/png, image/jpeg" class="hidden" required/>
+        <input bind:files name="image" id="dropzone" type="file" accept="image/png, image/jpeg" class="hidden" on:change={handleFileChange} required/>
     </label>
+    <div class="mb-3">
+        <button type="button" on:click={toggleGrayscale} class="text-gray-700 bg-gray-200 hover:bg-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">
+            {#if grayscale}Remove Grayscale Filter{:else}Apply Grayscale Filter{/if}
+        </button>
+    </div>
     <div class="mb-3">
         <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
         <input name="username" id="username" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
@@ -32,3 +76,9 @@
     </div>
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">Share</button>
 </form>
+
+<style>
+    .filter-grayscale {
+        filter: grayscale(100%);
+    }
+</style>
