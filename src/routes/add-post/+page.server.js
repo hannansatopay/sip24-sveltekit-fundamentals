@@ -12,7 +12,11 @@ export const actions = {
             data: {
                 username,
                 content,
+              
                 image
+                
+
+
             }
         });
 

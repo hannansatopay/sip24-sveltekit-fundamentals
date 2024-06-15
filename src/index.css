@@ -31,10 +31,33 @@ main {
     margin-top: 2rem; 
 }
 
+main, footer {
+    max-width: 64rem; 
+    margin: auto;
+}
 
+footer {
+    text-align: center;
+    font-size: 1rem; 
+    padding: 1rem 0; 
+}
 
+footer svg {
+    width: 1.5rem; 
+    margin-bottom: -0.25rem;
+}
 
+footer a {
+    color: #FFF;
+    text-decoration: none;
+    padding-bottom: 1px; 
+    border-bottom: 1px solid #FFF;
+    transition: border-color 0.2s linear;
+}
 
+footer a:hover {
+    border-color: var(--orange); 
+}
 
 h1 {
     margin: auto; 
@@ -55,17 +78,29 @@ h1::after,
     background-image: linear-gradient(90deg, var(--blue), var(--orange), var(--yellow));
 }
 
-
+form {
+    margin-bottom: 1em; 
+}
 
 canvas {
     width: 100%; 
     height: auto; 
-    background-color: #dde0e5; 
+    background-color: #374A67; 
     margin-bottom: 1em; 
     box-shadow: var(--shadow);
 }
 
-
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
 
 .container {
     margin-bottom: 1em; 
@@ -89,6 +124,7 @@ canvas {
     gap: 0.5em;
 } 
 
+/* button design */
 #download, 
 button,  
 input::-webkit-file-upload-button {
@@ -107,7 +143,6 @@ input::-webkit-file-upload-button {
 
 #reset,
 #download, 
-#share,
 input::-webkit-file-upload-button {
     padding: 1em 1.5em;
     border: 1px solid #FFF; 
@@ -123,7 +158,6 @@ input::-webkit-file-upload-button {
  
 #reset:hover,  
 #download:hover, 
-#share:hover,
 input::-webkit-file-upload-button:hover {
     border: 1px solid var(--orange); 
     background-color: var(--orange);
