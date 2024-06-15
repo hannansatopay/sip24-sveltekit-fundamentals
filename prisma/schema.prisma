@@ -11,9 +11,10 @@ datasource db {
 }
 
 model Post {
-  id Int @id @default(autoincrement())
-  username String
-  content String
-  image String
+  id        Int      @id @default(autoincrement())
+  username  String
+  content   String
+  image     String
   createdAt DateTime @default(now())
+  likes     Int      @default(0)
 }

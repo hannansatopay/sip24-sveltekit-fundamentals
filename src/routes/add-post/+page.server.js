@@ -1,8 +1,18 @@
-import { redirect } from "@sveltejs/kit";
-import prisma from "$lib/prisma";
+import { redirect } from '@sveltejs/kit';
+import prisma from '$lib/prisma';
+
+export const load = async () => {
+    const result = await prisma.post.findMany({
+        orderBy: {
+            createdAt: 'desc'
+        }
+    });
+
+    return { posts: result };
+}
 
 export const actions = {
-    default: async ({ request }) => {
+    submitPost: async ({ request }) => {
         const data = Object.fromEntries(await request.formData());
         let username = data.username;
         let content = data.content;
@@ -17,5 +27,17 @@ export const actions = {
         });
 
         throw redirect(302, "/");
+    },
+
+    likePost: async ({ request }) => {
+        const data = await request.json();
+        const { postId } = data;
+
+        await prisma.post.update({
+            where: { id: postId },
+            data: { likes: { increment: 1 } }
+        });
+
+        return { status: 200 };
     }
-}
+};
