@@ -4,7 +4,7 @@
 
 <header class=" p-4 shadow-md sticky top-0 z-10" style="background-color: #FFFAF0;">
     <div class="container mx-auto px-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold font-['Comic_Sans_MS']" style="background-color: #f9f9f9;">MyInsta</h1>
+        <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">MyInsta</h1>
         <a href="/add-post" class="bg-pink-500 text-white font-bold py-2 px-4 hover:bg-pink-700 rounded">Add Post</a>
     </div>
 </header>
