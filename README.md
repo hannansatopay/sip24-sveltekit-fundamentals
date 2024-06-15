@@ -1,14 +1,19 @@
-We are excited to welcome you to the SvelteKit Fundamentals course, a key part of the Summer Internship Program 2024. In this tutorial, you'll learn the basics of SvelteKit by building an Instagram clone.
+## HTML5 Canvas:
 
-## How to Contribute
-1. Fork the current repository.
-2. Clone the forked repository to your local machine.
-3. Create a new branch with your name.
-4. Implement the app by following the tutorial.
-5. Commit your changes and push them to your forked repository.
-6. Create a pull request to the main repository.
+An HTML5 canvas is added to the form for image preview and filter application.
+JavaScript is used to handle image loading and applying filters.
 
-### Additional Challenge
-Develop an image viewer and photo filter editor using HTML5 canvas. This setup should allow users to preview the uploaded image, and then apply basic filters like grayscale or sepia.
+## JavaScript Logic:
 
-This challenge is designed to push your skills further and give you hands-on experience with a more complex application feature.
+loadImage function reads the uploaded image file and sets it as the source for an image preview.
+applyFilter function applies the selected filter (none, grayscale, sepia) to the image displayed on the canvas.
+
+## Form and Upload Handling:
+
+The form includes a file input, username input, and content textarea.
+When a file is selected, it is displayed as a preview, and users can apply filters before submitting the form.
+
+## Styling:
+
+Basic styling is provided using Tailwind CSS classes for a clean and responsive design.
+With this setup, users can preview their uploaded image, apply filters, and share their post, similar to the functionality found in Instagram.
