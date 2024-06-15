@@ -1,6 +1,4 @@
-// src/routes/+page.server.js
-
-import prisma from '$lib/prisma'; // Adjust import path based on your project setup
+import prisma from '$lib/prisma';
 
 export const load = async () => {
     try {
@@ -9,7 +7,7 @@ export const load = async () => {
         return {
             props: {
                 data: {
-                    posts: posts || [] // Ensure posts is an array, even if empty
+                    posts: posts || []
                 }
             }
         };
@@ -19,7 +17,7 @@ export const load = async () => {
         return {
             props: {
                 data: {
-                    posts: [] // Return empty array if there's an error
+                    posts: []
                 }
             }
         };
