@@ -1,5 +1,3 @@
-// src/routes/add-post/+page.server.js
-
 import { redirect } from "@sveltejs/kit";
 import prisma from "$lib/prisma";
 
