@@ -2,6 +2,7 @@
     let files = null;
     let previewUrl = '';
     let fileName = '';
+    let filter = 'none';
 
     function handleFileChange(event) {
         files = event.target.files;
@@ -28,19 +29,12 @@
     }
 </style>
 
-<header class="bg-white py-4 shadow-md sticky top-0 z-10">
-    <div class="container mx-auto px-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">Craftlab</h1>
-        <a href="/" class="bg-blue-500 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">home</a>
-    </div>
-</header>
-
 <form class="container mx-auto p-5" method="POST" enctype="multipart/form-data">
     <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 cursor-pointer">
         <div class="flex flex-col items-center justify-center pt-5 pb-6">
             {#if previewUrl}
                 <!-- svelte-ignore a11y-img-redundant-alt -->
-                <img src={previewUrl} alt="Image Preview" class="image-preview" />
+                <img src={previewUrl} alt="Image Preview" class="image-preview" style="filter: {filter}" />
                 <p class="text-sm text-gray-500 font-semibold">{fileName}</p>
             {:else}
                 <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -49,7 +43,7 @@
                 <p class="text-sm text-gray-500 font-semibold">Click to upload</p>
             {/if}
         </div>
-        <input bind:files on:change={handleFileChange} name="image" id="dropzone" type="file" accept="image/png, image/jpeg, image/jpg" class="hidden">
+        <input on:change={handleFileChange} name="image" id="dropzone" type="file" accept="image/png, image/jpeg, image/jpg" class="hidden">
     </label>
 
     <div class="mb-3">
@@ -64,7 +58,7 @@
 
     <div class="mb-3">
         <label for="filter" class="block mb-2 text-sm font-medium text-gray-900">Filter</label>
-        <select id="filter" on:change={(e) => filter = e.target.value} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p">
+        <select bind:value={filter} id="filter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p">
             <option value="none">None</option>
             <option value="grayscale(100%)">Grayscale</option>
             <option value="sepia(100%)">Sepia</option>
