@@ -5,8 +5,8 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
-		"build:css": "tailwindcss build src/tailwind.css -o public/tailwind.css"
+		"preview": "vite preview"
+		
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
