@@ -2,7 +2,6 @@
 
 import prisma from '$lib/prisma'; // Adjust import path based on your project setup
 
-<<<<<<< Updated upstream
 export const load = async () => {
     try {
         const posts = await prisma.post.findMany();
@@ -26,10 +25,3 @@ export const load = async () => {
         };
     }
 };
-=======
-export const load = (async() => {
-    const result = await prisma.post.findMany();
-
-    return { posts: result };
-})
->>>>>>> Stashed changes
