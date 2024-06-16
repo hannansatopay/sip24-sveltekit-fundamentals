@@ -24,7 +24,7 @@
         {/each}
     </div>
 
-</div>  
+</div>   
 
 
 
