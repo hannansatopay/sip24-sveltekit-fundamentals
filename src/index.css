@@ -163,7 +163,7 @@ input::-webkit-file-upload-button:hover {
     background-color: var(--orange);
 }
 
-#grayscale, #monotone, #duotone {
+#grayscale, #monotone, #duotone,#sepia {
     padding: 1.1em 1.5em;
 }
 
@@ -173,6 +173,14 @@ input::-webkit-file-upload-button:hover {
 }
 
 #grayscale:hover {
+    background-color: #494a63; 
+}
+
+#sepia {
+    background-color: #616283;
+}
+
+#sepia:hover {
     background-color: #494a63; 
 }
 

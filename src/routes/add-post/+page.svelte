@@ -11,8 +11,8 @@
 
 
 
-<form class="container1 mx-auto p-5" method="POST" enctype="multipart/form-data">
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5" >Share</button>
+<form id="post-form" class="container1 mx-auto p-5" method="POST" enctype="multipart/form-data">
+    <button id="share-button"type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5" >Share</button>
 
     <div class="mb-3">
         <label for="username" class="block mb-2 text-sm font-medium text-white-900">Username</label>
@@ -57,6 +57,32 @@
 <main>
     <link rel="stylesheet" href="./src/index.css">
     <script src="./src/index.js"></script>
+    <script>
+        const form = document.getElementById('post-form');
+        const shareButton = document.getElementById('share-button');
+
+        shareButton.addEventListener('click', async () => {
+            const canvas = document.querySelector('canvas');
+            const dataURL = canvas.toDataURL('image/png');
+            const imageData = await fetch(dataURL).then(res => res.blob());
+            
+            const formData = new FormData(form);
+            formData.append('filteredImage', imageData, 'filteredImage.png');
+            
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData
+            });
+
+            if (response.ok) {
+                window.location.href = '/';
+            } else {
+                console.error('Error sharing the post');
+            }
+        });
+
+        // Existing filter application logic here
+    </script>
 </main>
 
 
