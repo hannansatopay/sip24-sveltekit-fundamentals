@@ -2,9 +2,9 @@
     let files = null;
 </script>
 
-<header class="bg-white py-4 shadow-md sticky top-0 z-10">
+<header class="bg-blue-100 py-4 shadow-md sticky top-0 z-10">
     <div class="container mx-auto px-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">Craftlab</h1>
+        <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">InstaNet</h1>
         <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Home</a>
     </div>
 </header>
