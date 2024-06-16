@@ -13,7 +13,7 @@
 <header class="bg-gray-800 py-4 shadow-md sticky top-0 z-10">
     <div class="container mx-auto px-4 flex justify-between items-center">
         <h1 class="text-2xl font-bold text-white font-['Comic_Sans_MS']">
-            Craftlab
+            Instagram clone-Craftlab
         </h1>
         <a
             href="/"
