@@ -1,4 +1,4 @@
-<script>
+<script> 
     let files = null;
 </script>
 <header class="bg-white py-4 shadow-md sticky top-0 z-10">
