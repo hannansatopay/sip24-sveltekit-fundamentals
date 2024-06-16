@@ -56,6 +56,7 @@
                 </p>
             {/if}
         </div>
+        <!-- damnn, you are reading this carefully!! -->
         <input
             bind:files
             name="image"
@@ -89,6 +90,7 @@
             class="bg-gray-600 border border-gray-500 text-gray-200 text-sm rounded-lg block w-full p-2.5"
         ></textarea>
     </div>
+    <!-- still checking out mate? -->
     <button
         type="submit"
         class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5"
