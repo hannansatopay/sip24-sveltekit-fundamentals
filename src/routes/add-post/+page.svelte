@@ -24,7 +24,6 @@
         const ctx = canvas.getContext('2d');
         const dropzone = document.getElementById('dropzone-container');
 
-        // Calculate aspect ratio
         const dropzoneWidth = dropzone.clientWidth;
         const dropzoneHeight = dropzone.clientHeight;
         const imgWidth = image.width;
@@ -32,7 +31,6 @@
         const imgAspectRatio = imgWidth / imgHeight;
         const dropzoneAspectRatio = dropzoneWidth / dropzoneHeight;
 
-        // Calculate the dimensions of the image to maintain the aspect ratio
         let drawWidth, drawHeight;
         if (imgAspectRatio > dropzoneAspectRatio) {
             drawWidth = dropzoneWidth;
@@ -45,7 +43,6 @@
         canvas.width = drawWidth;
         canvas.height = drawHeight;
 
-        // Center the image in the dropzone
         const offsetX = (dropzoneWidth - drawWidth) / 2;
         const offsetY = (dropzoneHeight - drawHeight) / 2;
 
@@ -53,7 +50,6 @@
         ctx.filter = filter;
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-        // Position the canvas within the dropzone
         canvas.style.position = 'absolute';
         canvas.style.left = `${offsetX}px`;
         canvas.style.top = `${offsetY}px`;
