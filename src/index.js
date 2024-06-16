@@ -8,6 +8,7 @@
         const download = document.getElementById('download');
         const input = document.getElementById('image');
         const shareButton = document.getElementById('share-button');
+        const sepia = document.getElementById('sepia');
 
         let imageWidth = null; 
         let imageHeight = null; 
@@ -67,6 +68,12 @@
                 const diff = Math.round((128/100) * gray); 
                 return [gray + diff, gray, 255 - diff];
             },
+            applySepia: (r, g, b) => {
+                const tr = 0.393 * r + 0.769 * g + 0.189 * b;
+                const tg = 0.349 * r + 0.686 * g + 0.168 * b;
+                const tb = 0.272 * r + 0.534 * g + 0.131 * b;
+                return [Math.min(255, tr), Math.min(255, tg), Math.min(255, tb)];
+            }
         }
 
         const resetFilter = () => {
@@ -82,6 +89,7 @@
         monotone.addEventListener('click', () => applyFilter('applyMonotone'));
         duotone.addEventListener('click', () => applyFilter('applyDuotone'));
         reset.addEventListener('click', resetFilter);
+        sepia.addEventListener('click', () => applyFilter('applySepia'));
 
         shareButton.addEventListener('click', async () => {
             const dataURL = canvas.toDataURL('image/png');

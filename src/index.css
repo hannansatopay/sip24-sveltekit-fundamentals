@@ -185,49 +185,11 @@ input::-webkit-file-upload-button:hover {
 }
 
 /* blue monoton button */
-#monotone {
-    background-color: var(--blue); 
-}
 
-#monotone:hover {
-    background-color: #4949c5; 
-}
 
-/* duotone gradient button */
-#duotone { 
-    background-color: transparent;
-    position: relative; 
-}
 
-#duotone::before, 
-#duotone::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;  
-    width: 100%; 
-    height: 100%; 
-    transition: opacity 0.2s linear;
-    z-index: -1;
-}
 
-#duotone::before {
-    background-image: linear-gradient(90deg, var(--blue), var(--orange), var(--yellow));
-    opacity: 0.8; 
-}
 
-#duotone:hover::before {
-    opacity: 0; 
-}
-
-#duotone::after {
-    background-image: linear-gradient(90deg, var(--yellow), var(--orange), var(--blue));
-    opacity: 0; 
-}
-
-#duotone:hover::after {
-    opacity: 0.8; 
-}
 
 @media screen and (min-width: 880px) {
     body {
@@ -282,16 +244,4 @@ input::-webkit-file-upload-button:hover {
 }
 
 
-#youtube {
-  position: absolute; 
-  top: 1em; 
-  right: 1em; 
-  color: #FFF; 
-  text-decoration: none; 
-  font-size: 1rem; 
-}
 
-#youtube svg {
-  width: 1.2rem; 
-  margin-bottom: -0.15rem; 
-}
