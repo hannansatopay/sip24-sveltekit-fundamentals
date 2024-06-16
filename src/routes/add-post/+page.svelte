@@ -46,7 +46,7 @@
         const offsetX = (dropzoneWidth - drawWidth) / 2;
         const offsetY = (dropzoneHeight - drawHeight) / 2;
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas before drawing
+        ctx.clearRect(0, 0, canvas.width, canvas.height); 
         ctx.filter = filter;
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
