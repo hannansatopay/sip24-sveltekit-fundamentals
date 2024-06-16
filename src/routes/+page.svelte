@@ -34,7 +34,7 @@
             <span class="text-gray-700">{post.content}</span>
         </div>
       </button>
-    {/each}
+    {/each} 
   </div>
 </div>
 
