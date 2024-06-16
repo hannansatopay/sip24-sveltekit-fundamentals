@@ -108,7 +108,7 @@
     <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50" style="height: 360px;">
       <div class="flex flex-col items-center justify-center pt-5 pb-6">
         {#if imageUrl}
-          <div class="image-container mb-4" style="height: 300px; width: 500px;">
+          <div class="image-container mb-4 items-center justify-center" style="align-items: center ;height: 300px; width: 500px;">
             <canvas id="mainCanvas"></canvas>
           </div>
           <p class="text-sm text-gray-500 font-semibold">{files[0].name}</p>
@@ -119,7 +119,7 @@
           <p class="text-sm text-gray-500 font-semibold">Click to upload</p>
         {/if}
       </div>
-      <input name="image" id="dropzone" type="file" accept="image/png, image/jpeg" class="hidden" required on:change={handleFileUpload}/>
+      <input name="image" id="dropzone" type="file" accept="image/png, image/jpeg" class="hidden items-center justify-center" required on:change={handleFileUpload}/>
     </label>
   
     {#if imageUrl}
