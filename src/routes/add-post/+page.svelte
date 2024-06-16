@@ -7,8 +7,8 @@
     let img = new Image();
     let originalImageData;
     let filteredImageData = '';
-    const defaultCanvasWidth = 320; // Fixed canvas width
-    const defaultCanvasHeight = 240; // Fixed canvas height
+    const defaultCanvasWidth = 320; // Fixed canvas width.
+    const defaultCanvasHeight = 240; // Fixed canvas height.
 
     onMount(() => {
         canvas = document.getElementById('canvas');
@@ -36,9 +36,9 @@
                     }
                     canvas.width = imgWidth;
                     canvas.height = imgHeight;
-                    // Store the original image data
+                    // Store the original image data.
                     context.drawImage(img, 0, 0, imgWidth, imgHeight);
-                    // Update the hidden input with the base64 data of the original image
+                    // Update the hidden input with the base64 data of the original image.
                     originalImageData = context.getImageData(0, 0, canvas.width, canvas.height);
                     
                     updateFilteredImageData();
@@ -59,7 +59,8 @@
         let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         let data = imageData.data;
         if (filter === 'grayscale') {
-            // As in RGB there's red,green,blue colour component value along with transparency value
+            // As in RGB there's red,green,blue colour component value
+            // along with transparency value and used avg pool for grayscale filter.
             for (let i = 0; i < data.length; i += 4) {
                 let avg = (data[i] + data[i++] + data[i + 2]) / 3;
                 data[i] = avg;
@@ -67,7 +68,7 @@
                 data[i + 2] = avg;
             }
         }
-        // Update the hidden input with the base64 data of the filtered image
+        // Update the hidden input with the base64 data of the filtered image.
         context.putImageData(imageData, 0, 0);
         
         updateFilteredImageData();
@@ -114,11 +115,11 @@
 
     <div class="mb-3">
         <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
-        <input name="username" id="username" type="text" class="bg-yellow-300 hover:bg-yellow-400 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+        <input name="username" id="username" type="text" class="bg-yellow-300 hover:bg-yellow-400 border border-gray-300 text-black text-sm rounded-lg block w-full p-2.5" />
     </div>
     <div class="mb-3">
         <label for="content" class="block mb-2 text-sm font-medium text-gray-900">Content</label>
-        <textarea name="content" id="content" class="bg-violet-300 hover:bg-violet-400 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"></textarea>
+        <textarea name="content" id="content" class="bg-violet-300 hover:bg-violet-400 border border-gray-300 text-black text-sm rounded-lg block w-full p-2.5"></textarea>
     </div>
     <button type="submit" class="text-white bg-rose-600 hover:bg-rose-700 font-medium rounded-lg text-sm px-5 py-2.5">Share</button>
 </form>
