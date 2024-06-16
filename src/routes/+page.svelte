@@ -1,6 +1,8 @@
 <script>
   export let data;
   let liked = {};
+  let showFullScreen = false;
+  let selectedImage = null;
 
   data.posts.forEach((post) => {
     liked[post.id] = false;
@@ -9,12 +11,22 @@
   function toggleLike(postId) {
     liked[postId] = !liked[postId];
   }
+
+  function openFullScreen(image) {
+    selectedImage = image;
+    showFullScreen = true;
+  }
+
+  function closeFullScreen() {
+    showFullScreen = false;
+    selectedImage = null;
+  }
 </script>
 
 <header class="bg-gray-800 p-4 shadow-md sticky top-0 z-10">
   <div class="container mx-auto px-4 flex justify-between items-center">
     <h1 class="text-white text-2xl font-bold font-['Comic_Sans_MS']">
-      Craftlab
+      Lonesta
     </h1>
     <a
       href="/add-post"
@@ -30,7 +42,7 @@
   >
     {#each data.posts as post}
       <div
-        class="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden"
+        class="bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden hover:bg-yellow-400 hover:border-2 hover:border-gray-800"
       >
         <div class="flex p-4">
           <img
@@ -40,15 +52,16 @@
           />
           <span class="font-bold text-lg pl-2">{post.username}</span>
         </div>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <img
-          class="w-full h-60 object-cover"
+          class="w-full h-60 object-cover cursor-pointer"
           src="data:image;base64,{post.image}"
           alt="Post"
+          on:click={() => openFullScreen(post.image)}
         />
         <div class="p-4">
           <p class="text-gray-700 mb-4">{post.content}</p>
           <div class="flex">
-            
             <button
               class="focus:outline-none"
               on:click={() => toggleLike(post.id)}
@@ -78,14 +91,29 @@
                 >
               {/if}
             </button>
-
             <span class="pl-2 text-sm text-gray-500"
-            >{new Date(post.createdAt).toLocaleString()}</span
-          >
-
+              >{new Date(post.createdAt).toLocaleString()}</span
+            >
           </div>
         </div>
       </div>
     {/each}
   </div>
 </div>
+
+{#if showFullScreen}
+  <div
+    class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+  >
+    <div class="relative">
+      <button
+        class="absolute top-2 right-2 text-white text-2xl"
+        on:click={closeFullScreen}>&times;</button
+      >
+      <img
+        src="data:image;base64,{selectedImage}"
+        class="max-h-screen max-w-full object-contain"
+      />
+    </div>
+  </div>
+{/if}
