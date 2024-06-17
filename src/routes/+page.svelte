@@ -36,13 +36,13 @@
   </div>
 </header>
 
-<div class="m-4">
+<div class="m-8">
   <div
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-10 gap-8"
   >
     {#each data.posts as post}
       <div
-        class="bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden hover:bg-yellow-400 hover:border-2 hover:border-gray-800"
+        class="post bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden hover:border-2"
       >
         <div class="flex p-4">
           <img
@@ -113,7 +113,18 @@
       <img
         src="data:image;base64,{selectedImage}"
         class="max-h-screen max-w-full object-contain"
+        alt="Post"
       />
     </div>
   </div>
 {/if}
+
+<style>
+  .post {
+    transition: transform 0.3s;
+  }
+
+  .post:hover {
+    transform: scale(1.1);
+  }
+</style>
