@@ -6,7 +6,7 @@
 </script>
 
 <div
-  class="border-2 border-slate-500 flex flex-col items-center gap-4 h-1/8 w-1/2 rounded-md p-4 shadow-lg shadow-cyan-500/50"
+  class="border-2 border-slate-500 flex flex-col items-center gap-0 h-1/8 w-1/2 rounded-md p-4 shadow-lg shadow-cyan-500/50"
 >
   <div class="flex items-center gap-2">
     <img
