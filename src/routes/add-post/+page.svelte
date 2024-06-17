@@ -26,7 +26,7 @@
 </header>
 
 <form class="container mx-auto p-5" method="POST" enctype="multipart/form-data">    
-    <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+    <label for="dropzone" class=    "mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
         <div class="flex flex-col items-center justify-center pt-5 pb-6">
             {#if imagePreviewUrl}
             <img src={imagePreviewUrl} alt="Image Preview" class="w-full h-40 object-cover mb-2 rounded-lg">
