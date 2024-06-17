@@ -1,8 +1,5 @@
 <script>
   import Icon from "@iconify/svelte";
-  const handleCreatePost = () => {
-    console.log("clicked");
-  };
 </script>
 
 <div
@@ -14,7 +11,7 @@
       <Icon icon="bx:home" />
       <a href="/">Home</a>
     </li>
-    <li class="flex items-center gap-2 h-12 p-2" onclick={handleCreatePost}>
+    <li class="flex items-center gap-2 h-12 p-2">
       <Icon icon="bx:plus" />
       <a href="/create-post">Create</a>
     </li>

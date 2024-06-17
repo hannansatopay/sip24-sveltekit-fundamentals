@@ -6,6 +6,7 @@ export const actions = {
     const formData = await request.formData();
 
     const content = formData.get("content");
+    if (!content) return;
 
     const image = Buffer.from(
       await formData.get("image").arrayBuffer()
@@ -21,11 +22,9 @@ export const actions = {
           username: "Guest",
         },
       });
-      return response;
+      throw redirect(301, "/");
     } catch (error) {
       console.log("Error : ", error);
-    } finally {
-      throw redirect(301, "/");
     }
   },
 };
