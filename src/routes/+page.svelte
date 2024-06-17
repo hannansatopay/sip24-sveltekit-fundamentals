@@ -1,3 +1,14 @@
+<script>
+    let title="Finstagram"
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+
+</head>
+
 <header class="py-4 bg-white shadow-md ">
     <div class="container flex items-center justify-between px-4 mx-auto">
         <h1 class=" text-2xl font-bold font-['Comic_Sans_MS'] ">MyGram</h1>
