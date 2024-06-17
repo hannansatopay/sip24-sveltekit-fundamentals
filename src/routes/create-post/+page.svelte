@@ -2,7 +2,6 @@
   import { default as Icon } from "@iconify/svelte";
   let files = null;
   let imageUrl = null;
-
   $: if (files && files.length) {
     imageUrl = URL.createObjectURL(files[0]);
   }
