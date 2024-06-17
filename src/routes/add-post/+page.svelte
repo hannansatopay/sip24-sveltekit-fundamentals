@@ -95,6 +95,12 @@
       text-align: center;
       color: initial;
     }
+    .image-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
   </style>
   
   <header class="p-4 shadow-md sticky top-0 z-10" style="background-color: #FFFAF0;">
@@ -105,10 +111,10 @@
   </header>
   
   <form class="container mx-auto p-5 my-8 w-10/12 md:w-6/12 bg-green-50 rounded-lg shadow-md" method="POST" enctype="multipart/form-data" style="background-color: #F0FFF0;">
-    <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50" style="height: 360px;">
+    <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50" style="height: 360px; position: relative;">
       <div class="flex flex-col items-center justify-center pt-5 pb-6">
         {#if imageUrl}
-          <div class="image-container mb-4 items-center justify-center" style="align-items: center ;height: 300px; width: 500px;">
+          <div class="image-container mb-4 items-center justify-center" style="align-items: center; height: 300px; width: 100%;">
             <canvas id="mainCanvas"></canvas>
           </div>
           <p class="text-sm text-gray-500 font-semibold">{files[0].name}</p>
@@ -119,7 +125,7 @@
           <p class="text-sm text-gray-500 font-semibold">Click to upload</p>
         {/if}
       </div>
-      <input name="image" id="dropzone" type="file" accept="image/png, image/jpeg" class="hidden items-center justify-center" required on:change={handleFileUpload}/>
+      <input name="image" id="dropzone" type="file" accept="image/png, image/jpeg" class="hidden items-center justify-center" required on:change={handleFileUpload} style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;"/>
     </label>
   
     {#if imageUrl}
