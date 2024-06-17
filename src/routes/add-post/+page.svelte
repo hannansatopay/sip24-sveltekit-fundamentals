@@ -1,5 +1,33 @@
 <script>
     let files= null;
+    let file = null;
+  let canvas;
+
+  function handleFile(event) {
+    const files = event.target.files;
+    if (files.length > 0) {
+      file = files[0];
+      displayImage(file);
+    }
+  }
+
+  function displayImage(file) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        if (canvas) {
+          const context = canvas.getContext('2d');
+          canvas.width = 300; // Set canvas width to 300 pixels
+          canvas.height = 300; // Set canvas height to 300 pixels
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          context.drawImage(img, 0, 0, 300, 300); // Draw image with size 300x300 pixels
+        }
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
 </script>
 <header class="bg-white py-4 shadow-md sticky top-0 z-10">
     <div class="container mx-auto px-4 flex justify-between items-center">
@@ -22,8 +50,11 @@
             <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG</p>
             {/if}  
         </div>
-        <input bind:files name='image' id="dropzone-file" type="file" accept="image/png, image/jpeg" class="hidden" />
+        <input bind:files name='image' id="dropzone-file" type="file" accept="image/png, image/jpeg" class="hidden" on:change="{handleFile}" />
     </label>
+    {#if files && files.length}
+        <canvas bind:this="{canvas}" width="300" height="300" class="mx-auto my-4 border border-white" />
+    {/if}
     <div class="mb-3">
         <label for='username'>Username</label>
         <input name='username' id='username' type='text' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
