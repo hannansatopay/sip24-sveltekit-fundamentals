@@ -1,15 +1,17 @@
 import prisma from '$lib/prisma';
 import { redirect } from '@sveltejs/kit';
 
-export const load = async () => {
+export const load = async ({ url }) => {
+    const sortOrder = url.searchParams.get('sort') || 'desc'; // 'desc' as default
     const result = await prisma.post.findMany({
         orderBy: {
-            createdAt: 'desc'
+            createdAt: sortOrder
         }
     });
 
     return { posts: result };
-}
+};
+
 
 export const actions = {
     submitPost: async ({ request }) => {

@@ -3,6 +3,7 @@
 
     export let data;
     let theme = 'light';
+    let sort = 'desc'; // default sort order
 
     onMount(() => {
         // Check local storage for theme preference
@@ -54,7 +55,15 @@
             console.error('Failed to delete post');
         }
     }
-    
+
+    function changeSort(order) {
+    sort = order;
+    // Reload the page with new sort order as a query parameter
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('sort', sort);
+    window.location.search = searchParams.toString();
+    }
+
 </script>
 
 <header class="bg-white py-4 shadow-md sticky top-0 z-10 dark:bg-dark">
@@ -66,6 +75,10 @@
                 <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked={theme === 'dark'} on:change={toggleTheme}/>
                 <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer dark:bg-gray-700"></label>
             </div>
+            <!--<select value={sort} on:change={(e) => changeSort(e.target.value)}>
+                <option value="desc">Latest First</option>
+                <option value="asc">Oldest First</option>
+            </select>  -->                      
             <span class="ml-2 text-gray-700 dark:text-gray-300">{theme === 'light' ? 'Light Mode' : 'Dark Mode'}</span>
         </div>
     </div>
