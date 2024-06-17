@@ -1,5 +1,9 @@
 <script>
-    import "../app.css";
+  import "../app.css";
+  import Sidebar from "../lib/Sidebar.svelte";
 </script>
 
-<slot />
+<div class="flex h-screen basis-2">
+  <Sidebar />
+  <slot />
+</div>
