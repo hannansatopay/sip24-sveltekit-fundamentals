@@ -15,9 +15,9 @@
 </header>
 
 <div class="container mx-auto p-5" style="background-color: #FFFAF0;">
-  <div class="grid grid-cols-1 gap-4 justify-center">
+  <div class="grid grid-cols-3 gap-4 justify-center">
     {#each data.posts as post}
-      <div class="w-full max-w-lg mx-auto bg-white rounded-lg shadow-lg border border-gray-300 overflow-hidden">
+      <div class="col-span-1 bg-white rounded-lg shadow-lg border border-gray-300 overflow-hidden">
         <span class="block text-xl font-bold text-indigo-600 p-5" style="color: #2F4F4F;">{post.username}</span>
         <img class="w-11/12 mx-auto mt-4 rounded" src="data:image;base64,{post.image}" alt="Post">
         <div class="p-2 flex items-center">
@@ -60,7 +60,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: calc(30% / 3); 
   }
 
   .heart-svg, .comment-svg, .share-svg {
@@ -85,7 +84,125 @@
     fill: #ff6666; 
   }
 
-  .grid-cols-1 .gap-4 {
-    gap: 4px; 
+  .grid-cols-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Adjust the gap between grid items */
   }
+
+  .col-span-1 {
+    grid-column: span 1; /* Each post takes up 1 column */
+  }
+
+  .bg-white {
+    background-color: white;
+  }
+
+  .rounded-lg {
+    border-radius: 8px;
+  }
+
+  .shadow-lg {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .border {
+    border-width: 1px;
+    border-color: #d1d5db;
+  }
+
+  .overflow-hidden {
+    overflow: hidden;
+  }
+
+  .p-5 {
+    padding: 20px;
+  }
+
+  .text-indigo-600 {
+    color: #4F4F4F;
+  }
+
+  .text-gray-700 {
+    color: #4F4F4F;
+  }
+
+  .text-xl {
+    font-size: 24px;
+  }
+
+  .font-bold {
+    font-weight: bold;
+  }
+
+  .mt-4 {
+    margin-top: 16px;
+  }
+
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .inline-block {
+    display: inline-block;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+
+  .items-center {
+    align-items: center;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .rounded {
+    border-radius: 4px;
+  }
+
+  .bg-pink-700 {
+    background-color: #f472b6;
+  }
+
+  .hover\:bg-pink-700:hover {
+    background-color: #f472b6;
+  }
+
+  .text-white {
+    color: #fff;
+  }
+
+  .hover\:bg-indigo-700:hover {
+    background-color: #4338ca;
+  }
+
+  .hover\:bg-gray-300:hover {
+    background-color: #d2d6dc;
+  }
+
+  .hover\:text-gray-900:hover {
+    color: #1a202c;
+  }
+
+  .hover\:border-transparent:hover {
+    border-color: transparent;
+  }
+
+  .focus\:outline-none:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  .transition {
+    transition: all .3s ease;
+  }
+
 </style>
