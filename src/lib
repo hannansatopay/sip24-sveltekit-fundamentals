@@ -1,1 +1,15 @@
+generator client{
+provider="prism-client-js"
+}
+datasource db{
+provider="sqllite"
+url=env["DATABASE_URL"}
 
+model post
+{
+id Int @id default(autoincrement())
+username String
+content String;
+image String
+createdAt DateTime @default(now())
+}
