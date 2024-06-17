@@ -1,5 +1,5 @@
-import { redirect } from '@sveltejs/kit';
 import prisma from '$lib/prisma';
+import { redirect } from '@sveltejs/kit';
 
 export const load = async () => {
     const result = await prisma.post.findMany({
@@ -39,5 +39,6 @@ export const actions = {
         });
 
         return { status: 200 };
-    }
+    },
+
 };
