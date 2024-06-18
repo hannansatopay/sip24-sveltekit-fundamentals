@@ -1,4 +1,3 @@
-
 import { redirect } from "@sveltejs/kit";
 import prisma from "$lib/prisma";
 
