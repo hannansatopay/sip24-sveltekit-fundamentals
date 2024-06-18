@@ -1,4 +1,3 @@
-// src/routes/+page.server.js
 import prisma from '$lib/prisma';
 
 export async function load() {
@@ -15,3 +14,4 @@ export async function load() {
     }))
   };
 }
+``

@@ -1,5 +1,3 @@
-<!-- correct page -->
-
 <script>
   import { onMount } from "svelte";
 
@@ -7,6 +5,7 @@
   let image = null;
   let canvas;
   let ctx;
+  let originalImageData = null;
 
   onMount(() => {
     canvas = document.getElementById("canvas");
@@ -43,9 +42,11 @@
     reader.onload = (e) => {
       image = new Image();
       image.onload = () => {
-        canvas.width = image.width;
-        canvas.height = image.height;
-        ctx.drawImage(image, 0, 0);
+        const aspectRatio = image.width / image.height;
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientWidth / aspectRatio;
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       };
       image.src = e.target.result;
     };
@@ -53,53 +54,35 @@
   }
 
   function applyFilter(filter) {
-    if (!image) return;
-    ctx.drawImage(image, 0, 0);
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imageData.data;
+    if (!originalImageData) return;
+
+    ctx.putImageData(originalImageData, 0, 0);
 
     switch (filter) {
       case "grayscale":
-        for (let i = 0; i < data.length; i += 4) {
-          const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-          data[i] = data[i + 1] = data[i + 2] = avg;
-        }
+        ctx.filter = "grayscale(100%)";
         break;
       case "sepia":
-        for (let i = 0; i < data.length; i += 4) {
-          const r = data[i];
-          const g = data[i + 1];
-          const b = data[i + 2];
-          data[i] = 0.393 * r + 0.769 * g + 0.189 * b;
-          data[i + 1] = 0.349 * r + 0.686 * g + 0.168 * b;
-          data[i + 2] = 0.272 * r + 0.534 * g + 0.131 * b;
-        }
+        ctx.filter = "sepia(100%)";
         break;
       case "invert":
-        for (let i = 0; i < data.length; i += 4) {
-          data[i] = 255 - data[i]; // Red
-          data[i + 1] = 255 - data[i + 1]; // Green
-          data[i + 2] = 255 - data[i + 2]; // Blue
-        }
+        ctx.filter = "invert(100%)";
         break;
       case "brightness":
-        for (let i = 0; i < data.length; i += 4) {
-          data[i] = Math.min(255, data[i] + 40); // Red
-          data[i + 1] = Math.min(255, data[i + 1] + 40); // Green
-          data[i + 2] = Math.min(255, data[i + 2] + 40); // Blue
-        }
+        ctx.filter = "brightness(150%)";
         break;
       case "contrast":
-        const contrast = 1.5;
-        const intercept = 128 * (1 - contrast);
-        for (let i = 0; i < data.length; i += 4) {
-          data[i] = data[i] * contrast + intercept;
-          data[i + 1] = data[i + 1] * contrast + intercept;
-          data[i + 2] = data[i + 2] * contrast + intercept;
-        }
+        ctx.filter = "contrast(150%)";
         break;
+      case "none":
+        ctx.filter = "none";
+        break;
+      default:
+        ctx.filter = "none";
     }
-    ctx.putImageData(imageData, 0, 0);
+
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    ctx.filter = "none"; // Reset the filter for future operations
   }
 </script>
 
@@ -142,7 +125,7 @@
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
           /></svg
         >
       {/if}
@@ -164,24 +147,40 @@
     class="flex items-center flex-col md:flex-row justify-center text-white font-medium"
   >
     <button
+      type="button"
+      on:click={() => applyFilter("none")}
+      class="bg-gray-700 hover:bg-gray-900 py-2 px-4 m-2 rounded"
+      >None</button
+    >
+    <button
+      type="button"
       on:click={() => applyFilter("grayscale")}
-      class="bg-gray-700 hover:bg-gray-900 py-2 px-4 m-2 rounded">Grayscale</button
+      class="bg-gray-700 hover:bg-gray-900 py-2 px-4 m-2 rounded"
+      >Grayscale</button
     >
     <button
+      type="button"
       on:click={() => applyFilter("sepia")}
-      class="bg-yellow-700 hover:bg-yellow-900 py-2 px-4 m-2 rounded">Sepia</button
+      class="bg-yellow-700 hover:bg-yellow-900 py-2 px-4 m-2 rounded"
+      >Sepia</button
     >
     <button
+      type="button"
       on:click={() => applyFilter("invert")}
-      class="bg-blue-700 hover:bg-blue-900 py-2 px-4 m-2 rounded">Invert</button
+      class="bg-blue-700 hover:bg-blue-900 py-2 px-4 m-2 rounded"
+      >Invert</button
     >
     <button
+      type="button"
       on:click={() => applyFilter("brightness")}
-      class="bg-lime-700 hover:bg-lime-900 py-2 px-4 m-2 rounded">Brightness</button
+      class="bg-lime-700 hover:bg-lime-900 py-2 px-4 m-2 rounded"
+      >Brightness</button
     >
     <button
+      type="button"
       on:click={() => applyFilter("contrast")}
-      class="bg-red-700 hover:bg-red-900 py-2 px-4 m-2 rounded">Contrast</button
+      class="bg-red-700 hover:bg-red-900 py-2 px-4 m-2 rounded"
+      >Contrast</button
     >
   </div>
 

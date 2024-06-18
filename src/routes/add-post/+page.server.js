@@ -7,13 +7,13 @@ export const actions = {
     const data = await request.formData();
     const username = data.get('username');
     const content = data.get('content');
-    const image = data.get('image');
+    const filteredImage = data.get('filteredImage'); // changed from `image` to `filteredImage`
 
-    if (!username || !content || !image) {
+    if (!username || !content || !filteredImage) {
       return fail(400, { message: 'All fields are required' });
     }
 
-    const buffer = Buffer.from(await image.arrayBuffer());
+    const buffer = Buffer.from(await filteredImage.arrayBuffer());
 
     try {
       await prisma.post.create({
