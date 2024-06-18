@@ -78,10 +78,25 @@
     }
 </script>
 
-<header class="bg-white py-4 shadow-md sticky top-0 z-10">
+<style>
+    .bg-custom-blue {
+        background-color: #bbd4de8f;
+    }
+    .text-custom-white {
+        color: #FFFFFF;
+    }
+    .bg-custom-blue-darker {
+        background-color: #094869;
+    }
+    .text-custom-blue-darker{
+        text-color: #094869;
+    }
+
+</style>
+<header class="bg-opacity-75 bg-custom-blue py-4 shadow-md sticky top-0 z-10">
     <div class="container mx-auto px-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">Craftlab</h1>
-        <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Home</a>
+        <h1 class="text-2xl font-bold text-custom-blue-darker font-['Comic-Sans-MS']">Craftlab</h1>
+        <a href="/" class="bg-custom-blue-darker hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Home</a>
     </div>
 </header>
 
@@ -100,19 +115,19 @@
         <input bind:files name="image" id="dropzone" type="file" accept="image/png, image/jpeg" class="hidden" required on:change={handleFileUpload}/>
     </label>
     <div class="mb-3">
-        <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+        <label for="username" class="block mb-2 text-sm font-medium text-custom-blue-darker">Username</label>
         <input name="username" id="username" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
     </div>
     <div class="mb-3">
-        <label for="content" class="block mb-2 text-sm font-medium text-gray-900">Content</label>
+        <label for="content" class="block mb-2 text-sm font-medium text-custom-blue-darker">Content</label>
         <textarea name="content" id="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"></textarea>
     </div>
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">Share</button>
+    <button type="submit" class=" bg-custom-blue-darker text-white hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">Share</button>
 
 </form>
 
-<div class="container mx-auto p-5">
-    <canvas class="border w-full"></canvas>
+<div class="container mx-auto p-4">
+    <canvas class="border w-60 h-40"></canvas>
     <div class="flex mt-3">
         <button on:click={() => applyFilter('grayscale')} class="bg-gray-500 hover:bg-gray-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 mr-2">Grayscale</button>
         <button on:click={() => applyFilter('sepia')} class="bg-yellow-500 hover:bg-yellow-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 mr-2">Sepia</button>
