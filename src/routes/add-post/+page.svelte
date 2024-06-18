@@ -104,30 +104,30 @@
   on:submit={handleSubmit}
   enctype="multipart/form-data"
 >
-  <div class="flex items-center justify-center border-2 border-gray-300 border-dashed rounded-lg cursor-pointer">
-    <canvas id="canvas" class="h-4/6 w-2/6 m-2"></canvas>
+  <div
+    class="flex items-center my-2 justify-center border-2 border-gray-300 border-dashed rounded-lg cursor-pointer"
+  >
+    <canvas id="canvas" class="h-3/6 w-2/6 m-2"></canvas>
 
-    <label
-      for="dropzone"
-      class="p-2"
-    >
+    <label for="dropzone" class="m-2">
       {#if files && files.length}
         <p class="text-sm text-gray-500 font-semibold">{files[0].name}</p>
       {:else}
         <svg
-          class="w-8 h-8 text-gray-500"
+          class="w-12 h-12 text-gray-500"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 20 16"
-          ><path
+        >
+          <path
             stroke="currentColor"
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-          /></svg
-        >
+            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+          />
+        </svg>
       {/if}
 
       <input
@@ -144,43 +144,40 @@
   </div>
 
   <div
-    class="flex items-center flex-col md:flex-row justify-center text-white font-medium"
+    class="grid md:grid-cols-6 grid-cols-2 justify-center text-white font-medium"
   >
     <button
       type="button"
       on:click={() => applyFilter("none")}
-      class="bg-gray-700 hover:bg-gray-900 py-2 px-4 m-2 rounded"
-      >None</button
+      class="bg-purple-500 hover:bg-purple-700 py-2 px-4 m-2 rounded">None</button
     >
     <button
       type="button"
       on:click={() => applyFilter("grayscale")}
-      class="bg-gray-700 hover:bg-gray-900 py-2 px-4 m-2 rounded"
+      class="bg-gray-500 hover:bg-gray-700 py-2 px-4 m-2 rounded"
       >Grayscale</button
     >
     <button
       type="button"
       on:click={() => applyFilter("sepia")}
-      class="bg-yellow-700 hover:bg-yellow-900 py-2 px-4 m-2 rounded"
+      class="bg-yellow-500 hover:bg-yellow-700 py-2 px-4 m-2 rounded"
       >Sepia</button
     >
     <button
       type="button"
       on:click={() => applyFilter("invert")}
-      class="bg-blue-700 hover:bg-blue-900 py-2 px-4 m-2 rounded"
-      >Invert</button
+      class="bg-blue-500 hover:bg-blue-700 py-2 px-4 m-2 rounded">Invert</button
     >
     <button
       type="button"
       on:click={() => applyFilter("brightness")}
-      class="bg-lime-700 hover:bg-lime-900 py-2 px-4 m-2 rounded"
+      class="bg-lime-500 hover:bg-lime-700 py-2 px-4 m-2 rounded"
       >Brightness</button
     >
     <button
       type="button"
       on:click={() => applyFilter("contrast")}
-      class="bg-red-700 hover:bg-red-900 py-2 px-4 m-2 rounded"
-      >Contrast</button
+      class="bg-red-500 hover:bg-red-700 py-2 px-4 m-2 rounded">Contrast</button
     >
   </div>
 
@@ -196,6 +193,7 @@
       required
     />
   </div>
+
   <div class="mb-3">
     <label for="content" class="block mb-2 text-sm font-medium text-gray-900"
       >Content</label
@@ -207,9 +205,11 @@
       required
     ></textarea>
   </div>
+
   <button
     type="submit"
     class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
-    >Share</button
-  >
+    >Share
+  </button>
+
 </form>

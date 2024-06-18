@@ -1,5 +1,3 @@
-<!-- correct page -->
-
 <script>
   export let data;
   let liked = {};
@@ -38,9 +36,9 @@
   </div>
 </header>
 
-<div class="m-8">
+<div class="container mx-auto">
   <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-10 gap-8"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-10 gap-8 m-6"
   >
     {#each data.posts as post}
       <div
@@ -52,7 +50,7 @@
             src="0.jpg"
             alt="Post"
           />
-          <span class="font-bold text-lg pl-2">{post.username}</span>
+          <span class="font-bold text-md pl-2">{post.username}</span>
         </div>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <img
@@ -62,7 +60,7 @@
           on:click={() => openFullScreen(post.image)}
         />
         <div class="p-2">
-          <p class="text-gray-700 mb-2">{post.content}</p>
+          <p class="text-gray-700 text-sm mb-2">{post.content}</p>
           <div class="flex">
             <button
               class="focus:outline-none"

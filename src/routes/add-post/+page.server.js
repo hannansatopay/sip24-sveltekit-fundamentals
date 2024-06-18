@@ -7,7 +7,7 @@ export const actions = {
     const data = await request.formData();
     const username = data.get('username');
     const content = data.get('content');
-    const filteredImage = data.get('filteredImage'); // changed from `image` to `filteredImage`
+    const filteredImage = data.get('filteredImage');
 
     if (!username || !content || !filteredImage) {
       return fail(400, { message: 'All fields are required' });
