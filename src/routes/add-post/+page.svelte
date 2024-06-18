@@ -1,20 +1,37 @@
+<!-- correct page -->
+
 <script>
+  import { onMount } from "svelte";
+
   let files = null;
   let image = null;
   let canvas;
   let ctx;
 
+  onMount(() => {
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const response = await fetch('/add-post', {
-      method: 'POST',
-      body: formData
+    // Convert canvas to Blob and append to formData
+    await new Promise((resolve) => {
+      canvas.toBlob((blob) => {
+        formData.append("filteredImage", blob, "filteredImage.png");
+        resolve();
+      });
+    });
+
+    const response = await fetch("/add-post", {
+      method: "POST",
+      body: formData,
     });
 
     if (response.ok) {
-      window.location.href = '/';
+      window.location.href = "/";
     } else {
       const result = await response.json();
       console.error(result.message);
@@ -42,13 +59,13 @@
     const data = imageData.data;
 
     switch (filter) {
-      case 'grayscale':
+      case "grayscale":
         for (let i = 0; i < data.length; i += 4) {
           const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
           data[i] = data[i + 1] = data[i + 2] = avg;
         }
         break;
-      case 'sepia':
+      case "sepia":
         for (let i = 0; i < data.length; i += 4) {
           const r = data[i];
           const g = data[i + 1];
@@ -58,21 +75,21 @@
           data[i + 2] = 0.272 * r + 0.534 * g + 0.131 * b;
         }
         break;
-      case 'invert':
+      case "invert":
         for (let i = 0; i < data.length; i += 4) {
-          data[i] = 255 - data[i];       // Red
+          data[i] = 255 - data[i]; // Red
           data[i + 1] = 255 - data[i + 1]; // Green
           data[i + 2] = 255 - data[i + 2]; // Blue
         }
         break;
-      case 'brightness':
+      case "brightness":
         for (let i = 0; i < data.length; i += 4) {
-          data[i] += 40;       // Red
-          data[i + 1] += 40; // Green
-          data[i + 2] += 40; // Blue
+          data[i] = Math.min(255, data[i] + 40); // Red
+          data[i + 1] = Math.min(255, data[i + 1] + 40); // Green
+          data[i + 2] = Math.min(255, data[i + 2] + 40); // Blue
         }
         break;
-      case 'contrast':
+      case "contrast":
         const contrast = 1.5;
         const intercept = 128 * (1 - contrast);
         for (let i = 0; i < data.length; i += 4) {
@@ -99,17 +116,23 @@
   </div>
 </header>
 
-<form class="container mx-auto p-5" on:submit={handleSubmit} enctype="multipart/form-data">
-  <label
-    for="dropzone"
-    class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50"
-  >
-    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+<form
+  class="mx-auto p-5"
+  on:submit={handleSubmit}
+  enctype="multipart/form-data"
+>
+  <div class="flex items-center justify-center border-2 border-gray-300 border-dashed rounded-lg cursor-pointer">
+    <canvas id="canvas" class="h-4/6 w-2/6 m-2"></canvas>
+
+    <label
+      for="dropzone"
+      class="p-2"
+    >
       {#if files && files.length}
-        <img src={URL.createObjectURL(files[0])} alt="Preview" class="max-h-64" />
+        <p class="text-sm text-gray-500 font-semibold">{files[0].name}</p>
       {:else}
         <svg
-          class="w-8 h-8 mb-4 text-gray-500"
+          class="w-8 h-8 text-gray-500"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -120,22 +143,49 @@
             stroke-linejoin="round"
             stroke-width="2"
             d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-          /></svg>
-        <p class="text-sm text-gray-500 font-semibold">Click to upload</p>
+          /></svg
+        >
       {/if}
-    </div>
-    <input
-      bind:files
-      name="image"
-      id="dropzone"
-      type="file"
-      accept="image/png, image/jpeg"
-      class="hidden"
-      required
-      on:change={() => loadImage(files[0])}
-    />
-  </label>
-  <div class="mb-3">
+
+      <input
+        bind:files
+        name="image"
+        id="dropzone"
+        type="file"
+        accept="image/png, image/jpeg"
+        class="hidden"
+        required
+        on:change={() => loadImage(files[0])}
+      />
+    </label>
+  </div>
+
+  <div
+    class="flex items-center flex-col md:flex-row justify-center text-white font-medium"
+  >
+    <button
+      on:click={() => applyFilter("grayscale")}
+      class="bg-gray-700 hover:bg-gray-900 py-2 px-4 m-2 rounded">Grayscale</button
+    >
+    <button
+      on:click={() => applyFilter("sepia")}
+      class="bg-yellow-700 hover:bg-yellow-900 py-2 px-4 m-2 rounded">Sepia</button
+    >
+    <button
+      on:click={() => applyFilter("invert")}
+      class="bg-blue-700 hover:bg-blue-900 py-2 px-4 m-2 rounded">Invert</button
+    >
+    <button
+      on:click={() => applyFilter("brightness")}
+      class="bg-lime-700 hover:bg-lime-900 py-2 px-4 m-2 rounded">Brightness</button
+    >
+    <button
+      on:click={() => applyFilter("contrast")}
+      class="bg-red-700 hover:bg-red-900 py-2 px-4 m-2 rounded">Contrast</button
+    >
+  </div>
+
+  <div class="my-3">
     <label for="username" class="block mb-2 text-sm font-medium text-gray-900"
       >Username</label
     >
@@ -160,34 +210,7 @@
   </div>
   <button
     type="submit"
-    class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5"
-    >Share</button>
+    class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
+    >Share</button
+  >
 </form>
-
-<div class="container mx-auto p-5">
-  <div class="flex flex-col items-center justify-center">
-    <canvas bind:this={canvas} class="border border-gray-300 mb-3"></canvas>
-    <div class="flex space-x-4">
-      <button
-        on:click={() => applyFilter('grayscale')}
-        class="bg-gray-700 hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
-      >Grayscale</button>
-      <button
-        on:click={() => applyFilter('sepia')}
-        class="bg-yellow-700 hover:bg-yellow-900 text-white font-medium py-2 px-4 rounded"
-      >Sepia</button>
-      <button
-        on:click={() => applyFilter('invert')}
-        class="bg-red-700 hover:bg-red-900 text-white font-medium py-2 px-4 rounded"
-      >Invert</button>
-      <button
-        on:click={() => applyFilter('brightness')}
-        class="bg-blue-700 hover:bg-blue-900 text-white font-medium py-2 px-4 rounded"
-      >Brightness</button>
-      <button
-        on:click={() => applyFilter('contrast')}
-        class="bg-green-700 hover:bg-green-900 text-white font-medium py-2 px-4 rounded"
-      >Contrast</button>
-    </div>
-  </div>
-</div>

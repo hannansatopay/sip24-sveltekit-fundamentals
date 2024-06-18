@@ -1,3 +1,5 @@
+<!-- correct page -->
+
 <script>
   export let data;
   let liked = {};
@@ -44,9 +46,9 @@
       <div
         class="post bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden hover:border-2"
       >
-        <div class="flex p-4">
+        <div class="flex p-2">
           <img
-            class="w-8 h-8 object-cover rounded-full"
+            class="w-6 h-6 object-cover rounded-full"
             src="0.jpg"
             alt="Post"
           />
@@ -54,13 +56,13 @@
         </div>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <img
-          class="w-full h-60 object-cover cursor-pointer"
+          class="w-full h-48 object-cover cursor-pointer"
           src="data:image;base64,{post.image}"
           alt="Post"
           on:click={() => openFullScreen(post.image)}
         />
-        <div class="p-4">
-          <p class="text-gray-700 mb-4">{post.content}</p>
+        <div class="p-2">
+          <p class="text-gray-700 mb-2">{post.content}</p>
           <div class="flex">
             <button
               class="focus:outline-none"
