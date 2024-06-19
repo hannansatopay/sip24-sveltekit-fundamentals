@@ -1,98 +1,4 @@
 <script>
-    export let data
-</script>
-
-<header class="bg-white py-4 shadow-md sticky top-0">
-    <div class="container mx-auto px-4 flex justify-between items-center">
-       <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">Craftlab</h1>
-       <a href="/add-post" class="bg-gradient-to-r from-purple-500 to-purple-900 text-white font-bold py-2 px-4 rounded-md">Add post</a>
-    </div>
-</header>
-
-<div class="container mx-auto md:my-5">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <!-- Post template -->
-         {#each data.posts as post}
-            <div class="border border-gray-300 rounded-lg">
-                <img class="rounded-t-lg w-full" src="data:image;base64,{post.image}" alt="Post">
-                <div class="text-sm py-2 px-2">
-                    <span class="font-bold">{post.username}</span>
-                    <span class="text-gray-700">{post.content}</span>
-                </div>
-            </div>
-         {/each}
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <script>
     let files = null;
     let canvas, ctx, originalImage, modifiedImage
     function handleFileChange(e) {
@@ -162,7 +68,7 @@
 <header class="bg-white py-4 shadow-md sticky top-0">
     <div class="container mx-auto px-4 flex justify-between items-center">
        <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">Craftlab</h1>
-       <a href="/" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">Home</a>
+       <a href="/" class="bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white font-bold py-2 px-4 rounded-md">Home</a>
     </div>
 </header>
 
@@ -192,5 +98,5 @@
         <label for="content" class="block mb-2 font-medium text-gray-900">Content</label>
         <textarea name="content" id="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"></textarea>   
     </div>
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5">Share</button>
-</form> -->
+    <button type="submit" class="text-white bg-gradient-to-r from-amber-500 to-pink-500 font-medium rounded-lg px-5 py-2.5">Share</button>
+</form>
