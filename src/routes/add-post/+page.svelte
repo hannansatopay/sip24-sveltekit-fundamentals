@@ -75,7 +75,7 @@
             }
 
             alert('Post submitted successfully!');
-            window.location.href = '/'; // Redirect to home page after successful submission
+            window.location.href = '/'; 
         } catch (error) {
             console.error('Error submitting post:', error);
             alert('Failed to submit post. Please try again.');
