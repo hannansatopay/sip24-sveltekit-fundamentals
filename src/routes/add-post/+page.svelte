@@ -1,6 +1,7 @@
 <script>
     let files = null;
-    let img = new Image();
+    let img =  new Image();
+
 
     function loadImage(event) {
         const file = event.target.files[0];

@@ -11,7 +11,7 @@
 
 <div class="container mx-auto md:my-5">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {#each data.posts.slice().reverse() as post}
+        {#each data.posts as post}
         <div>
             <img class="w-full" src="data:image;base64,{post.image}" alt="Post">
             <div class="text-sm py-2">
