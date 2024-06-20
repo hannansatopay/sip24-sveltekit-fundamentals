@@ -9,7 +9,7 @@
         <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">Craftlab</h1>
         <a href="/add-post" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add post</a>
     </div>
-</header>
+</header>   
 
 <div class="container mx-auto md:my-5">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
