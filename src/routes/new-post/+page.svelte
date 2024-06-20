@@ -1,18 +1,31 @@
 <script>
   let fileName = '';
+  let data = new FormData();
 
   function handleFileChange(event) {
     const file = event.target.files[0];
     console.log(file);
     if (file) {
       fileName = file.name;
+      data.set('image', file);
     } else {
       fileName = '';
     }
   }
 
-  export let data;
-  
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    data.set(name, value);
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    await fetch(event.target.action, {
+      method: event.target.method,
+      body: data
+    });
+  }
 </script>
 
 <style>
@@ -30,9 +43,9 @@
   </div>
 </header>
 
-<form class="container mx-auto p-5" method="POST" enctype="multipart/form-data">
+<form class="container mx-auto p-5" method="POST" enctype="multipart/form-data" on:submit={handleSubmit} action="/path/to/your/endpoint">
   <div class="mb-4">
-    <input type="file" id="image" class="hidden-input" accept="image/jpeg, image/png" on:change="{handleFileChange}" required/>
+    <input type="file" id="image" class="hidden-input" accept="image/jpeg, image/png" on:change={handleFileChange} required/>
     <label for="image" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-5 text-center">
       {#if fileName}
         <span>{fileName}</span>
@@ -43,11 +56,11 @@
   </div>
   <div class="mb-3">
     <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
-    <input name="username" id="username" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required/>
+    <input name="username" id="username" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 on:change={handleInputChange} required"/>
   </div>
   <div class="mb-3">
     <label for="content" class="block mb-2 text-sm font-medium text-gray-900">Content</label>
-    <textarea name="content" id="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required></textarea>
+    <textarea name="content" id="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 on:change={handleInputChange} required"></textarea>
   </div>
   <button type="submit" class="bg-blue-700 hover:bg-blue-900 rounded-lg px-5 text-white font-medium text-sm py-2.5">Post</button>
 </form>
