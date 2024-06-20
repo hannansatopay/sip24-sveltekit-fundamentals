@@ -1,5 +1,7 @@
 <script>
     let files =null;
+    let sepia = 0;
+    let grayscale=0;
     let previewImageBase64 = '';
     function fileUpload(event){
         if(event.target.files && event.target.files[0]){
@@ -7,6 +9,7 @@
             const allowed_types = ['image/jpg','image/jpeg']
             const max_height = 15200;
             const max_width = 25600;
+
 
             const reader = new FileReader();
             reader.onload = (e) =>{
@@ -22,8 +25,19 @@
                 }
             }
             reader.readAsDataURL(event.target.files[0]);
+            event.target.files[0].style.filter = `grayscale(100%)`
         }
     }
+
+    function fnGrayScale(){
+        document.getElementById("previewImage").style.filter = `grayscale(${grayscale})`
+    }
+
+    function fnSepia(){
+        document.getElementById("previewImage").style.filter = `sepia(${sepia})`
+        console.log(previewImageBase64)
+    }
+
 </script>
 <header class="bg-white py-4 shadow-md sticky top-0 z-10">
     <div class="container mx-auto px-4 flex justify-between items-center">
@@ -36,8 +50,17 @@
     <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
         <div class="flex flex-col items-center justify-center pt-5 pb-5">
             {#if files && files.length}
-                <img src="{previewImageBase64}" class="grayscale" alt="preview" height="150px" width="150px">
+                <img src="{previewImageBase64}" id="previewImage" alt="preview" height="150px" width="150px">
                 <p class="text-sm text-gray-500 font-semibold ">{files[0].name}</p>
+                <div>
+                    <span>Gray Scale</span>
+                    <input type="range" bind:value={grayscale} on:change={fnGrayScale} name="" id="" min="0" max="1" step=".1">
+                </div>
+                <div>
+                    <span>Sepia</span>
+                <input type="range" bind:value={sepia} on:change={fnSepia} name="" id="" min="0" max="1" step=".1" >
+                </div>
+
             {:else}
                 <svg class="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/></svg>
                 <p class="text-sm text-gray-500 font-semibold "> Click to upload</p>
@@ -59,7 +82,5 @@
 
 </form>
 <style>
-    .grayscale{
-        filter:grayscale(100%);
-    }
+    
 </style>
