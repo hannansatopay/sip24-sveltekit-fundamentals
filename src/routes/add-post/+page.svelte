@@ -1,7 +1,6 @@
 <script>
     let files = null;
     let img = new Image();
-    let modifiedImageDataURI = null;
 
     function loadImage(event) {
         const file = event.target.files[0];
@@ -48,38 +47,6 @@
         }
 
         ctx.putImageData(imageData, 0, 0);
-
-        // Save modified image data URI
-        modifiedImageDataURI = canvas.toDataURL('image/png');
-    }
-
-    async function handleFormSubmit(event) {
-        event.preventDefault();
-
-        // Get the modified image data URI if available, otherwise use original image data
-        const imageDataURI = modifiedImageDataURI || canvas.toDataURL('image/png');
-
-        const formData = new FormData();
-        formData.append('username', event.target.username.value);
-        formData.append('content', event.target.content.value);
-        formData.append('image', imageDataURI);
-
-        try {
-            const response = await fetch('/api/add-post', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to submit post.');
-            }
-
-            alert('Post submitted successfully!');
-            window.location.href = '/'; 
-        } catch (error) {
-            console.error('Error submitting post:', error);
-            alert('Failed to submit post. Please try again.');
-        }
     }
 </script>
 
@@ -90,8 +57,8 @@
     </div>
 </header>
 
-<form class="container mx-auto p-5" on:submit={handleFormSubmit}>
-    <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+<form class="container mx-auto p-5" method="POST" enctype="multipart/form-data">   
+    <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50"> 
         <div class="flex flex-col items-center justify-center pt-5 pb-6">
             {#if files && files.length}
                 <p class="text-sm text-gray-500 font-semibold">{files[0].name}</p>
@@ -101,7 +68,7 @@
             {/if}
         </div>
         <input bind:files on:change={loadImage} name="image" id="dropzone" type="file" accept="image/png, image/jpeg" class="hidden" required/>
-    </label>
+    </label> 
 
     <canvas id="canvas" class="border mb-3 w-full"></canvas>
 
