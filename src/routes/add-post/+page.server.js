@@ -1,6 +1,9 @@
 import { redirect } from "@sveltejs/kit";
 import prisma from "$lib/prisma";
 
+
+// server configurations
+
 export const actions = {
     default: async ({ request }) => {
         const data = Object.fromEntries(await request.formData());
