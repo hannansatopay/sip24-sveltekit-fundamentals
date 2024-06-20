@@ -16,21 +16,16 @@
   function handleInputChange(event) {
     const { name, value } = event.target;
     data.set(name, value);
+    
   }
 
   async function handleSubmit(event) {
-    event.preventDefault();
+    
 
-    const response = await fetch(event.target.action, {
+    await fetch(event.target.action, {
       method: event.target.method,
       body: data
     });
-
-    if (response.ok) {
-      window.location.reload(); // Reload the page after successful submission
-    } else {
-      console.error('Failed to submit the form');
-    }
   }
 </script>
 
@@ -49,7 +44,7 @@
   </div>
 </header>
 
-<form class="container mx-auto p-5" method="POST" action="/submit" enctype="multipart/form-data" on:submit={handleSubmit}>
+<form class="container mx-auto p-5" method="POST" enctype="multipart/form-data" on:submit={handleSubmit}>
   <div class="mb-4">
     <input type="file" id="image" class="hidden-input" accept="image/jpeg, image/png" on:change={handleFileChange} required/>
     <label for="image" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-5 text-center">
