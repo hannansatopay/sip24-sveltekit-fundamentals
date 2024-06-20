@@ -1,5 +1,5 @@
 {
-	"name": "sip24-sveltekit-fundamentals",
+	"name": "instagram-clone",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -17,5 +17,9 @@
 		"tailwindcss": "^3.4.4",
 		"vite": "^5.0.3"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@prisma/client": "^5.15.1",
+		"prisma": "^5.15.1"
+	}
 }
