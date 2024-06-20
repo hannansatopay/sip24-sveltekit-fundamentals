@@ -1,14 +1,38 @@
-We are excited to welcome you to the SvelteKit Fundamentals course, a key part of the Summer Internship Program 2024. In this tutorial, you'll learn the basics of SvelteKit by building an Instagram clone.
+# create-svelte
 
-## How to Contribute
-1. Fork the current repository.
-2. Clone the forked repository to your local machine.
-3. Create a new branch with your name.
-4. Implement the app by following the tutorial.
-5. Commit your changes and push them to your forked repository.
-6. Create a pull request to the main repository.
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
 
-### Additional Challenge
-Develop an image viewer and photo filter editor using HTML5 canvas. This setup should allow users to preview the uploaded image, and then apply basic filters like grayscale or sepia.
+## Creating a project
 
-This challenge is designed to push your skills further and give you hands-on experience with a more complex application feature.
+If you're seeing this, you've probably already done this step. Congrats!
+
+```bash
+# create a new project in the current directory
+npm create svelte@latest
+
+# create a new project in my-app
+npm create svelte@latest my-app
+```
+
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```bash
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
