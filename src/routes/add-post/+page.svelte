@@ -67,8 +67,8 @@
 
 <header class="bg-white py-4 shadow-md sticky top-0">
     <div class="container mx-auto px-4 flex justify-between items-center">
-       <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">Craftlab</h1>
-       <a href="/" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">Home</a>
+       <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">SlamBook</h1>
+       <a href="/" class="bg-violet-700 hover:bg-violet-800 text-white font-bold py-2 px-4 rounded-md">Home</a>
     </div>
 </header>
 
@@ -86,9 +86,9 @@
     </label>
     {#if files && files.length}
     <p class="text-sm text-gray-500 font-semibold mb-1">Add Filters</p>
-    <button on:click={resetImage}  type="button" class="text-white bg-blue-700 hover:bg-blue-800 rounded-lg px-3 py-2">Reset</button>
-    <button on:click={applyGrayscale} type="button" class="text-white bg-blue-700 hover:bg-blue-800 rounded-lg px-3 py-2">Grayscale</button>
-    <button on:click={applySepia} type="button" class="text-white bg-blue-700 hover:bg-blue-800 rounded-lg px-3 py-2">Sepia</button>
+    <button on:click={applyGrayscale} type="button" class="text-white bg-gray-500 hover:bg-gray-700  rounded-lg px-3 py-2">Grayscale</button>
+    <button on:click={applySepia} type="button" class="text-white bg-yellow-500 hover:bg-yellow-700 rounded-lg px-3 py-2">Sepia</button>
+    <button on:click={resetImage}  type="button" class="text-white bg-violet-700 hover:bg-violet-800 rounded-lg px-3 py-2">Reset</button>
     {/if}
     <div class="mt-3 mb-3">
         <label for="username" class="block mb-2 font-medium text-gray-900">Username</label>
@@ -98,5 +98,5 @@
         <label for="content" class="block mb-2 font-medium text-gray-900">Content</label>
         <textarea name="content" id="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"></textarea>   
     </div>
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5">Share</button>
+    <button type="submit" class="text-white bg-violet-700 hover:bg-violet-800 font-medium rounded-lg px-5 py-2.5">Share</button>
 </form>
