@@ -93,7 +93,7 @@
       </h1>
       <a
         href="/"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
         >Home</a
       >
     </div>
@@ -105,7 +105,7 @@
     enctype="multipart/form-data"
   >
     <div
-      class="flex items-center my-2 justify-center border-2 border-gray-300 border-dashed rounded-lg cursor-pointer"
+      class="flex items-center my-2 justify-center border-2 border-gray-300 border-dashed rounded-lg-lg cursor-pointer"
     >
       <canvas id="canvas" class="h-3/6 w-2/6 m-2"></canvas>
   
@@ -149,35 +149,35 @@
       <button
         type="button"
         on:click={() => applyFilter("none")}
-        class="bg-purple-500 hover:bg-purple-700 py-2 px-4 m-2 rounded">None</button
+        class="bg-purple-500 hover:bg-purple-700 py-2 px-4 m-2 rounded-lg">None</button
       >
       <button
         type="button"
         on:click={() => applyFilter("grayscale")}
-        class="bg-gray-500 hover:bg-gray-700 py-2 px-4 m-2 rounded"
+        class="bg-gray-500 hover:bg-gray-700 py-2 px-4 m-2 rounded-lg"
         >Grayscale</button
       >
       <button
         type="button"
         on:click={() => applyFilter("sepia")}
-        class="bg-yellow-500 hover:bg-yellow-700 py-2 px-4 m-2 rounded"
+        class="bg-yellow-500 hover:bg-yellow-700 py-2 px-4 m-2 rounded-lg"
         >Sepia</button
       >
       <button
         type="button"
         on:click={() => applyFilter("invert")}
-        class="bg-blue-500 hover:bg-blue-700 py-2 px-4 m-2 rounded">Invert</button
+        class="bg-blue-500 hover:bg-blue-700 py-2 px-4 m-2 rounded-lg">Invert</button
       >
       <button
         type="button"
         on:click={() => applyFilter("brightness")}
-        class="bg-lime-500 hover:bg-lime-700 py-2 px-4 m-2 rounded"
+        class="bg-lime-500 hover:bg-lime-700 py-2 px-4 m-2 rounded-lg"
         >Brightness</button
       >
       <button
         type="button"
         on:click={() => applyFilter("contrast")}
-        class="bg-red-500 hover:bg-red-700 py-2 px-4 m-2 rounded">Contrast</button
+        class="bg-red-500 hover:bg-red-700 py-2 px-4 m-2 rounded-lg">Contrast</button
       >
     </div>
   
@@ -189,7 +189,7 @@
         name="username"
         id="username"
         type="text"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg-lg block w-full p-2.5"
         required
       />
     </div>
@@ -201,14 +201,14 @@
       <textarea
         name="content"
         id="content"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg-lg block w-full p-2.5"
         required
       ></textarea>
     </div>
   
     <button
       type="submit"
-      class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
+      class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg-lg text-sm px-5 py-2.5"
       >Share
     </button>
   
