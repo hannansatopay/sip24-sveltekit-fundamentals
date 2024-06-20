@@ -8,6 +8,7 @@ export const actions = {
         let content = data.content;
         let image = Buffer.from(await data.image.arrayBuffer()).toString('base64');
 
+        
         await prisma.post.create({
             data: {
                 username,
