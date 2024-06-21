@@ -1,5 +1,18 @@
 <script>
    let  files =null;
+   let imgurl='';
+
+   function handleFileChange(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imgurl = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
   
 </script>
 
@@ -13,14 +26,14 @@
 <form class="container mx-auto p-5" method="POST" enctype="multipart/form-data">
     <label for="dropzone" class="mb-3 flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer">
         <div class="flex flex-col items-center justify-center pt-5 pb-6">
-            {#if files && files.length}
-                <p class="text-sm text-gray-500 font-semibold">{files[0].name}</p>
+            {#if imgurl}
+                <img src="{imgurl}" class="w-[300px]">
             {:else}
                 <svg class="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V8a4 4 0 0110.38-2.412M7 16h10M7 16v-2a4 4 0 00-4-4m14 6v-2a4 4 0 00-4-4m-4 4v4m0 0H4m16 0h-6"></path></svg>
                 <p class="text-sm text-gray-500 font-semibold">Click to Upload</p>
             {/if}
         </div>
-        <input bind:files={files} name="image" id="dropzone" type="file" accept="image/*" class="hidden" required />
+        <input bind:files={files} on:change={handleFileChange}  name="image" id="dropzone" type="file" accept="image/*" class="hidden" required />
     </label>
 
     <div class="mb-3">
