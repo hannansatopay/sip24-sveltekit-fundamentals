@@ -1,5 +1,12 @@
-<script>
-    import "../app.css";
-</script>
+import prisma from "../lib/prisma";
 
-<slot />
+export const load = async () => {
+    const result = await prisma.post.findMany({
+      orderBy: {
+        createdAt: 'desc', 
+      },
+    });
+    return {
+      posts: result,
+    };
+  };
