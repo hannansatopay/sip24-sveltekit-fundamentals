@@ -4,6 +4,7 @@
   let ctx;
   let originalImageData = null;
   let currentImageData = null;
+
   function handleFileUpload(event) {
     const file = event.target.files[0];
     if (file) {
@@ -28,6 +29,7 @@
       reader.readAsDataURL(file);
     }
   }
+
   function applyFilter(filter) {
     if (!originalImageData) return;
     const data = currentImageData.data;
@@ -69,12 +71,14 @@
     }
     ctx.putImageData(currentImageData, 0, 0);
   }
+
   function resetImage() {
     if (originalImageData) {
       ctx.putImageData(originalImageData, 0, 0);
       currentImageData.data.set(originalImageData.data);
     }
   }
+
   $: {
     if (canvas) {
       ctx = canvas.getContext("2d");
@@ -107,15 +111,16 @@
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
-          viewBox="00 20 16"
-          ><path
+          viewBox="0 0 20 16"
+        >
+          <path
             stroke="currentColor"
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
             d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-          /></svg
-        >
+          />
+        </svg>
         <p class="text-sm text-gray-500 font-semibold">Click to Upload</p>
       {/if}
     </div>
@@ -136,7 +141,16 @@
       class="text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 ml-2"
       on:click={resetImage}>Reset</button
     >
-
+    <button
+      type="button"
+      class="text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 ml-2"
+      on:click={() => applyFilter("grayscale")}>Grayscale</button
+    >
+    <button
+      type="button"
+      class="text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 ml-2"
+      on:click={() => applyFilter("sepia")}>Sepia</button
+    >
     <button
       type="button"
       class="text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 ml-2"
@@ -172,7 +186,7 @@
   </div>
   <button
     type="submit"
-    class="text-white bg-blue-600 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5"
+    class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5"
     >Share</button
   >
 </form>
