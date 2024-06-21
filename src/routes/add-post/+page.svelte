@@ -1,0 +1,127 @@
+<script >
+    let file;
+    let username = '';
+    let content = '';
+    let originalImage = null;
+    let canvas;
+    let imagePreviewUrl = '';
+
+    function previewImage(event) {
+        file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                // Limit image dimensions
+                const canvasWidth = img.width > 400 ? 400 : img.width;
+                const canvasHeight = img.height > 300 ? 300 : img.height;
+
+                const ctx = canvas.getContext('2d');
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+                ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
+
+                // Save original image data for reset
+                originalImage = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
+
+                // Set preview image
+                imagePreviewUrl = canvas.toDataURL('image/png');
+            };
+            img.src = event.target.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function applyFilter(filter) {
+        const context = canvas.getContext('2d');
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+
+            if (filter === 'grayscale') {
+                const gray = 0.299 * r + 0.587 * g + 0.114 * b;
+                data[i] = data[i + 1] = data[i + 2] = gray;
+            } else if (filter === 'sepia') {
+                data[i] = r * 0.393 + g * 0.769 + b * 0.189;
+                data[i + 1] = r * 0.349 + g * 0.686 + b * 0.168;
+                data[i + 2] = r * 0.272 + g * 0.534 + b * 0.131;
+            }
+        }
+
+        context.putImageData(imageData, 0, 0);
+    }
+
+    function resetImage() {
+        if (originalImage) {
+            const context = canvas.getContext('2d');
+            context.putImageData(originalImage, 0, 0);
+        }
+    }
+</script>
+
+<style>
+    .canvas-container {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+    }
+    .canvas-container canvas {
+        width: 100%;
+        height: auto;
+    }
+</style>
+
+<header class="bg-white py-4 shadow-md sticky top-0 z-10">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">Craftlab</h1>
+        <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Home</a>
+    </div>
+</header>
+
+<form class="container mx-auto p-5" method="POST" enctype="multipart/form-data">
+    <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+
+
+            {#if imagePreviewUrl}
+            <img id="image-preview" src={imagePreviewUrl} alt="Image Preview" class="mb-4" style="max-width: 100%; max-height: 100%;">
+            <!-- <p class="text-sm text-gray-500 font-semibold">Click to upload</p> -->
+            {:else}
+                <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/></svg>
+                <p class="text-sm text-gray-500 font-semibold">Click to upload</p>
+            {/if}
+            
+        </div>
+        <input name="image" id="dropzone" type="file" accept="image/png, image/jpeg" class="hidden" on:change={previewImage} required/>
+    </label>
+    <div class="mb-3">
+        <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+        <input bind:value={username} name="username" id="username" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    </div>
+    <div class="mb-3">
+        <label for="content" class="block mb-2 text-sm font-medium text-gray-900">Content</label>
+        <textarea bind:value={content} name="content" id="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"></textarea>
+    </div>
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">Share</button>
+</form>
+
+
+<div class="container mx-auto p-5">
+    <div class="canvas-container">
+        <canvas bind:this={canvas} class="border rounded-lg"></canvas>
+    </div>
+    <div class="mt-4 flex justify-center space-x-4">
+        <button on:click={() => applyFilter('grayscale')} class="text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5">Grayscale</button>
+        <button on:click={() => applyFilter('sepia')} class="text-white bg-yellow-700 hover:bg-yellow-800 font-medium rounded-lg text-sm px-5 py-2.5">Sepia</button>
+        <button on:click={resetImage} class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">Reset</button>
+    </div>
+</div>
