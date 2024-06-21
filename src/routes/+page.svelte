@@ -23,7 +23,7 @@
             <img class="w-full " src="data:image;base64,{post.image}" alt="no-bro">
             <div class="py-2 text-sm ">
                 <span class="font-bold ">{post.username}</span>
-                <span class="text-green-800 "> {post.content}</span>
+                <span class="text-green-700 "> {post.content}</span>
 
             </div>
         </div>
