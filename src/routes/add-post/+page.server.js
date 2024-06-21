@@ -15,7 +15,30 @@ export const actions = {
                 image
             }
         });
-
+        
         throw redirect(302, "/");
-    }
-}
+    },
+
+    //  delete: async ({ params }) => {
+    //     const { id } = params;
+
+    //     try {
+    //         await prisma.post.delete({
+    //             where: {
+    //                 id: parseInt(id, 10),
+    //             },
+    //         });
+
+    //         return {
+    //             status: 200,
+    //             body: { message: 'Post deleted successfully' },
+    //         };
+    //     } catch (error) {
+    //         console.error('Error deleting post:', error);
+    //         return {
+    //             status: 500,
+    //             body: { error: 'Failed to delete post' },
+    //         };
+    //     }
+    // }
+};
