@@ -20,6 +20,7 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^5.15.0",
-		"prisma": "^5.15.0"
+		"dotenv": "^16.4.5",
+		"prisma": "^5.15.1"
 	}
 }
