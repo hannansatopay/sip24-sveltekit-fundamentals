@@ -22,7 +22,7 @@
         }
     }
 
-    function applyGreyscale() {
+    function applyGrayscale() {
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data
         for (let i = 0; i < data.length; i += 4) {
@@ -87,7 +87,7 @@
     {#if files && files.length}
     <p class="text-sm text-gray-500 font-semibold mb-1">Add Filters</p>
     <button on:click={resetImage}  type="button" class="bg-black hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg">Reset</button>
-    <button on:click={applyGreyscale} type="button" class="bg-black hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg">Greyscale</button>
+    <button on:click={applyGrayscale} type="button" class="bg-black hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg">Grayscale</button>
     <button on:click={applySepia} type="button" class="bg-black hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg">Sepia</button>
     {/if}
     <div class="mt-3 mb-3">
