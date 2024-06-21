@@ -4,5 +4,6 @@ CREATE TABLE "Post" (
     "username" TEXT NOT NULL,
     "caption" TEXT NOT NULL,
     "Image" TEXT NOT NULL,
+    "filter" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

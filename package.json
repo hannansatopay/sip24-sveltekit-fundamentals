@@ -20,6 +20,7 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^5.15.0",
-		"prisma": "^5.15.0"
+		"bootstrap-icons": "^1.11.3",
+		"prisma": "^5.15.1"
 	}
 }

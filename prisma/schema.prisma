@@ -15,5 +15,6 @@ model Post {
   username String
   caption String
   Image String
+  filter String
   createdAt DateTime @default(now())
 }

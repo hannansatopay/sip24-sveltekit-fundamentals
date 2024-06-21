@@ -9,12 +9,14 @@ export const actions = {
     const Image = Buffer.from(await data.image.arrayBuffer()).toString(
       "base64"
     );
+    const filter = data.filter;
 
     await prisma.post.create({
       data: {
         username,
         caption,
         Image,
+        filter,
       },
     });
 
