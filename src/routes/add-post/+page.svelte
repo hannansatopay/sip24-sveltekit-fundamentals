@@ -63,7 +63,7 @@ function applyFilter(filterName) {
 
 <form class="container mx-auto p-5" method="POST" enctype="multipart/form-data">
     <label for="dropzone" class="mb-3 flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer">
-        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+        <div class="flex flex-col-1 items-center justify-center pt-5 pb-6">
             {#if imgurl}
                 <img src="{imgurl}" class="w-[300px] image-preview" style="--filter: {selectedFilter}">
             {:else}
