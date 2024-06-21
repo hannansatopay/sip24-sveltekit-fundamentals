@@ -1,5 +1,6 @@
 <script>
     let title="Finstagram"
+    export let data;
 </script>
 <head>
     <meta charset="UTF-8">
@@ -17,29 +18,16 @@
 </header>
 <div class="container mx-auto md:my-5">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        {#each data.posts as post }
         <div>
-            <img class="w-full " src="https://picsum.photos/600" alt="no-bro">
+            <img class="w-full " src="data:image;base64,{post.image}" alt="no-bro">
             <div class="py-2 text-sm ">
-                <span class="font-bold ">username</span>
-                <span class="text-green-700 "> abcdfghijklmnopqrstuvwxyz</span>
+                <span class="font-bold ">{post.username}</span>
+                <span class="text-green-700 "> {post.content}</span>
 
             </div>
         </div>
-        <div>
-            <img class="w-full " src="https://picsum.photos/600" alt="no-bro">
-            <div class="py-2 text-sm ">
-                <span class="font-bold ">username</span>
-                <span class="text-green-700 "> abcdfghijklmnopqrstuvwxyz</span>
-                
-            </div>
-        </div>
-        <div>
-            <img class="w-full " src="https://picsum.photos/600" alt="no-bro">
-            <div class="py-2 text-sm ">
-                <span class="font-bold ">username</span>
-                <span class="text-green-700 "> abcdfghijklmnopqrstuvwxyz</span>
-                
-            </div>
-        </div>
+        {/each}
+        
     </div>
 </div>

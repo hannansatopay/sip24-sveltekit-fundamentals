@@ -17,7 +17,7 @@
         <a href="/" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Home</a>
     </div>
 </header> 
-<form class="container p-5 mx-auto">
+<form class="container p-5 mx-auto" method="POST" enctype="multipart/form-data">
     
     <label for="dropzone" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 hover:bg-gray-100">
         <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -43,8 +43,8 @@
 
     
     <div class="mb-3 ">
-        <label for="username" class="block mb-2 text-sm font-medium text-green-500 ">User name</label>
-        <input type="text" class="block w-full p-2.5 text-sm text-gray-800 rounded-lg bg-gray-50 border border-grey-700">
+        <label for="username" class="block mb-2 text-sm font-medium text-green-500 ">Username</label>
+        <input type="text" name="username" id="username" class="block w-full p-2.5 text-sm text-gray-800 rounded-lg bg-gray-50 border border-grey-700">
     </div>
     <div class="mb-3">
         <label for="content" class="block mb-2 text-sm font-medium text-green-500 ">Content</label>
