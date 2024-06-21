@@ -1,7 +1,45 @@
 <script>
     let files = null;
+    let filter = "none";
+    function handleFileChange(event) {
+        files = event.target.files;
+        if (files && files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.getElementById("previewCanvas");
+                    const ctx = canvas.getContext("2d");
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.filter = filter;
+                    ctx.drawImage(img, 0, 0);
+                }
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(files[0]);
+        }
+    }
+    function applyFilter(selectedFilter) {
+        filter = selectedFilter;
+        if (files && files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.getElementById("previewCanvas");
+                    const ctx = canvas.getContext("2d");
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.filter = filter;
+                    ctx.drawImage(img, 0, 0);
+                }
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(files[0]);
+        }
+    }
 </script>
-
 
 <header class="bg-white py-4 shadow-md sticky top-0 z-10">
     <div class="container mx-auto px-4 flex justify-between items-center">
@@ -39,3 +77,14 @@
     </div>
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">Share</button>
 </form>
+
+<div class="container mx-auto mt-5">
+    <h2 class="text-lg font-medium mb-2">Image Preview</h2>
+    <canvas id="previewCanvas" class="border border-gray-300"></canvas>
+
+    <div class="mt-3">
+        <button type="button" on:click={() => applyFilter('none')} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">No Filter</button>
+        <button type="button" on:click={() => applyFilter('grayscale(100%)')} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">Grayscale</button>
+        <button type="button" on:click={() => applyFilter('sepia(100%)')} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">Sepia</button>
+    </div>
+</div>
