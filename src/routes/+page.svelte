@@ -11,9 +11,14 @@
 
 <div class="container mx-auto px-4 md:my-5">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {#each data.posts as post}
+        {#each data.posts as post, id}
             <div>
-                <img class="w-full" src="data:image;base64,{post.image}" alt="Post">
+                <img
+          src="data:image;base64,{post.image}"
+          alt="Post"
+          class="w-full"
+          id="{id}"
+        />
                 <div class="text-sm py-2">
                     <span class="font-bold">{post.username}</span>
                     <span class="text-gray-700">{post.content}</span>
