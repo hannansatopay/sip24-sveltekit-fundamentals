@@ -1,12 +1,12 @@
 <script>
     import { onMount } from "svelte";
     let files = null;
-    let imageSrc = '';
+    let imageSrc = "";
     let canvas, ctx;
 
     onMount(() => {
         if (canvas) {
-            ctx = canvas.getContext('2d');
+            ctx = canvas.getContext("2d");
         }
     });
 
@@ -55,7 +55,7 @@
 <form class="container mx-auto p-5" method="post" enctype="multipart/form-data">
     <label
         for="dropzone"
-        class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-grey-300"
+        class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-grey-300 cursor-pointer"
     >
         <div class="flex flex-col items-center justify-center pt-5 pb-6">
             {#if files && files.length}
@@ -64,12 +64,21 @@
                 </p>
             {:else}
                 <svg
-                    class="w-8 h-8 mb-4 text-grey-500"
-                    aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
                 >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
+                    />
                 </svg>
+
                 <p class="text-sm text-grey-500 font-semibold">
                     Click to upload
                 </p>
@@ -124,13 +133,25 @@
         </div>
 
         <div class="mb-3 flex space-x-2">
-            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={() => applyFilter('none')}>
+            <button
+                type="button"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                on:click={() => applyFilter("none")}
+            >
                 No Filter
             </button>
-            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={() => applyFilter('grayscale(1)')}>
+            <button
+                type="button"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                on:click={() => applyFilter("grayscale(1)")}
+            >
                 Grayscale
             </button>
-            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={() => applyFilter('sepia(1)')}>
+            <button
+                type="button"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                on:click={() => applyFilter("sepia(1)")}
+            >
                 Sepia
             </button>
         </div>
@@ -138,5 +159,8 @@
 
     <button
         type="submit"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" > Share </button>
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    >
+        Share
+    </button>
 </form>
