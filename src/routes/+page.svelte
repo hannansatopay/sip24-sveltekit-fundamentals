@@ -1,5 +1,6 @@
 <script>
     export let data;
+    // import { onMount } from 'svelte';
 </script>
 
 <header class="bg-white py-4 shadow-md sticky top-0 z-10">
@@ -9,7 +10,7 @@
     </div>
 </header>
 
-<div claass="container mx-auto md:my-5">
+<div class="container mx-auto md:my-5">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         {#each data.posts as post}
             <div>
@@ -22,3 +23,5 @@
         {/each}
     </div>
 </div>
+
+
