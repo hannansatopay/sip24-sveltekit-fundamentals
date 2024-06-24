@@ -1,8 +1,6 @@
 <script>
     import { onMount } from 'svelte';
 
-
-
     let data = { posts: [] };
     let username = '';
     let content = '';
@@ -32,6 +30,7 @@
 
         const result = await res.json();
         if (result.success) {
+            // Update the local data with the new posts list
             data.posts = result.posts;
         }
 
@@ -93,7 +92,7 @@
             {#each data.posts as post, index}
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
                     <div class="aspect-w-16 aspect-h-9">
-                        <img class="object-cover w-full h-full" src={post.image ? `data:image;base64,${post.image}` : 'https://picsum.photos/600'} alt="post">
+                        <img class="object-cover w-full h-full" src={post.image ? `data:image;base64,${post.image}` : 'https://via.placeholder.com/200x300'} alt="post">
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center pb-2">
@@ -115,8 +114,3 @@
         font-family: 'Comic Sans MS', cursive;
     }
 </style>
-
-
-
-
-
