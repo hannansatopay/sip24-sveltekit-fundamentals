@@ -1,3 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* app.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Additional custom styles can go below */
+.container{
+    width: 84%;
+    min-height: 100%;
+    background: linear-gradient(135deg, #B58AFD, #FFA4D3,#FFD785);
+   
+  }
