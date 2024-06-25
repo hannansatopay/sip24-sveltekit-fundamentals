@@ -1,4 +1,6 @@
 import {redirect} from "@sveltejs/kit";
+import { navigate } from 'svelte-routing';
+
 import prisma from "$lib/prisma";
 export const actions = {
     default: async({request}) => {
