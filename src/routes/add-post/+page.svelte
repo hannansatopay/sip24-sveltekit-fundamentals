@@ -144,12 +144,15 @@
     border: 1px solid #ccc;
     margin-top: 10px;
   }
+  .bg-sky-blue {
+        background-color: #22befb; /* Sky blue color */
+    }
 </style>
 
-<header class="bg-white py-4 shadow-md sticky top-0 z-10">
+<header class="bg-white py-3 shadow-md sticky top-0 z-10">
   <div class="container mx-auto px-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">Craftlab</h1>
-    <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Home</a>
+      <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">InstaGallery</h1>
+      <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded bg-sky-blue">Home</a>
   </div>
 </header>
 
@@ -186,5 +189,5 @@
     <canvas bind:this="{canvas}" class="fade-in"></canvas>
   </div>
 
-  <button type="submit" class="submit-button text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">Share</button>
+  <button type="submit" class="bg-sky-blue submit-button text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">Share</button>
 </form>
