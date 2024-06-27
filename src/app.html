@@ -1,12 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		%sveltekit.head%
-	</head>
-	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">%sveltekit.body%</div>
-	</body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+  <title>CraftLab Instagram Post</title>
+  <link rel="stylesheet" href="app.css">
+  %sveltekit.head%
+</head>
+<bodydata-sveltekit-preload-data="hover">
+	<div style="display: contents">%sveltekit.body%</div>>
+  <div class="instagram-post">
+    <div class="header">
+      <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/202301/instagram-1834010_1920-one_one.png?VersionId=Kpq5k7rXsySXqISW6Nbx5EO_wMghK64_" alt="Profile Picture" class="profile-pic">
+      <span class="username">craftlab_official</span>
+    </div>
+    <img src="https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg" alt="CraftLab Post" class="post-image">
+    <div class="actions">
+      <button class="like-btn">❤️</button>
+      <button class="comment-btn">💬</button>
+      <button class="share-btn">📤</button>
+    </div>
+    <div class="likes">120 likes</div>
+    <div class="caption">
+      <span class="username">craftlab_official</span> Check out our latest craft project! #crafting #diy #craftlab
+    </div>
+    <div class="comments">
+      <span class="username">user1</span> Amazing! Can't wait to try this out.
+    </div>
+    <div class="add-comment">
+      <input type="text" placeholder="Add a comment...">
+      <button class="post-btn">Post</button>
+    </div>
+  </div>
+</body>
 </html>
