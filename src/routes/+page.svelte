@@ -10,7 +10,8 @@
 </header>
 
 
-<div class="bg-lime-100 min-h-screen">
+   <div class="bg-lime-100 min-h-screen"> 
+    <!-- <div class="bg-gray-900 min-h-screen"> -->
     <div class="container ml-40">
         <div class="flex flex-col items-center gap-4">
             {#each [...data.posts].reverse() as post}

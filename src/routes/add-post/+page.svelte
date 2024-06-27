@@ -1,29 +1,48 @@
 <script>
     let files = null;
-    let Url = '';
-    let filter = '';
+    let imageUrl = '';
+    let currentFilter = '';
     let imageFilter = '';
 
-    function FileUpload(event) {
+    function handleFileUpload(event) {
         files = event.target.files;
         if (files && files.length > 0) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                Url = e.target.result;
-                filter = ''; 
+                imageUrl = e.target.result;
+                currentFilter = '';
+                updateImageFilter('none');
             };
             reader.readAsDataURL(files[0]);
         }
     }
 
-    function applyOriginal() {
-        filter = '';
-        imageFilter = '';
+    function updateImageFilter(filter) {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        const image = new Image();
+        image.src = imageUrl;
+
+        image.onload = () => {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            context.drawImage(image, 0, 0);
+
+            context.filter = filter;
+            context.drawImage(image, 0, 0);
+
+            imageUrl = canvas.toDataURL();
+            currentFilter = filter;
+            imageFilter = filter;
+        };
     }
 
-    function applyGreyscale() {
-        filter = 'grayscale(100%)';
-        imageFilter = 'grayscale(100%)';
+    function applyOriginalFilter() {
+        updateImageFilter('none');
+    }
+
+    function applyGreyscaleFilter() {
+        updateImageFilter('grayscale(100%)');
     }
 </script>
 
@@ -37,8 +56,8 @@
     <form class="container mx-auto p-5" method="POST" enctype="multipart/form-data">
         <label for="dropzone" class="mb-3 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
             <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                {#if Url}
-                    <img src={Url} alt="Image Preview" class="w-full h-full object-cover mb-2" style="filter: {filter};">
+                {#if imageUrl}
+                    <img src={imageUrl} alt="Image Preview" class="w-full h-full object-cover mb-2" style="filter: {currentFilter};">
                     <p class="text-sm text-gray-500 font-semibold">{files[0].name}</p>
                 {:else}
                     <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -47,14 +66,14 @@
                     <p class="text-sm text-gray-500 font-semibold">Click to upload</p>
                 {/if}
             </div>
-            <input bind:files name="image" id="dropzone" type="file" accept="image/png, image/jpeg" on:change={FileUpload} class="hidden" required/>
+            <input bind:files name="image" id="dropzone" type="file" accept="image/png, image/jpeg" on:change={handleFileUpload} class="hidden" required/>
         </label>
         <input type="hidden" name="imageFilter" value={imageFilter} />
 
-        {#if Url}
+        {#if imageUrl}
             <div class="flex justify-center mt-3">
-                <button type="button" on:click={applyOriginal} class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mx-2">Original</button>
-                <button type="button" on:click={applyGreyscale} class="text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 mx-2">Greyscale</button>
+                <button type="button" on:click={applyOriginalFilter} class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mx-2">Original</button>
+                <button type="button" on:click={applyGreyscaleFilter} class="text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 mx-2">Greyscale</button>
             </div>
         {/if}
 
