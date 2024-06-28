@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer & Filter Editor</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="file" id="imageInput" accept="image/*">
+        <canvas id="imageCanvas"></canvas>
+        <div>
+            <button onclick="applyGrayscale()">Grayscale</button>
+            <button onclick="applySepia()">Sepia</button>
+            <button onclick="clearFilters()">Clear Filters</button>
+        </div>
+    </div>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const imageCanvas = document.getElementById('imageCanvas');
+        const ctx = imageCanvas.getContext('2d');
+        let originalImage = null;
+        let currentImage = null;
+
+        imageInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        originalImage = img;
+                        currentImage = img;
+                        drawImage();
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function drawImage() {
+            imageCanvas.width = currentImage.width;
+            imageCanvas.height = currentImage.height;
+            ctx.drawImage(currentImage, 0, 0);
+        }
+
+        function applyGrayscale() {
+            if (currentImage) {
+                ctx.drawImage(originalImage, 0, 0);
+                const imageData = ctx.getImageData(0, 0, imageCanvas.width, imageCanvas.height);
+                const data = imageData.data;
+                for (let i = 0; i < data.length; i += 4) {
+                    const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                    data[i] = avg;       // Red
+                    data[i + 1] = avg;   // Green
+                    data[i + 2] = avg;   // Blue
+                }
+                ctx.putImageData(imageData, 0, 0);
+                currentImage = imageCanvas;
+            }
+        }
+
+        function applySepia() {
+            if (currentImage) {
+                ctx.drawImage(originalImage, 0, 0);
+                const imageData = ctx.getImageData(0, 0, imageCanvas.width, imageCanvas.height);
+                const data = imageData.data;
+                for (let i = 0; i < data.length; i += 4) {
+                    const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                    data[i] = avg + 100;     // Red
+                    data[i + 1] = avg + 50;  // Green
+                    data[i + 2] = avg;       // Blue
+                }
+                ctx.putImageData(imageData, 0, 0);
+                currentImage = imageCanvas;
+            }
+        }
+
+        function clearFilters() {
+            currentImage = originalImage;
+            drawImage();
+        }
+    </script>
+</body>
+</html>
