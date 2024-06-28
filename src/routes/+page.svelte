@@ -1,5 +1,37 @@
+<!-- App.svelte -->
 <script>
-    export let data;
+    import { onMount } from 'svelte';
+
+    let imageSrc = '';
+    let filter = '';
+    let isLoading = false;
+    let error = '';
+
+    onMount(async () => {
+        try {
+            isLoading = true;
+            const res = await fetch('/path/to/image');
+            const blob = await res.blob();
+            imageSrc = URL.createObjectURL(blob);
+        } catch (err) {
+            error = 'Failed to fetch image.';
+        } finally {
+            isLoading = false;
+        }
+    });
+
+    function applyFilter(type) {
+        filter = type;
+        const canvas = document.getElementById('imageCanvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.onload = function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous image
+            ctx.filter = type;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        };
+        img.src = imageSrc;
+    }
 </script>
 
 <header class="bg-white py-4 shadow-md sticky top-0 z-10">
@@ -10,15 +42,21 @@
 </header>
 
 <div class="container mx-auto md:my-5">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {#each data.posts as post}
+    {#if isLoading}
+        <p>Loading...</p>
+    {:else if error}
+        <p>{error}</p>
+    {:else}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-                <img class="w-full" src="data:image;base64,{post.image}" alt="Post">
-                <div class="text-sm py-2">
-                    <span class="font-bold">{post.username}</span>
-                    <span class="text-gray-700">{post.content}</span>
-                </div>
+                <canvas id="imageCanvas" class="w-full" width="800" height="600"></canvas>
             </div>
-        {/each}
-    </div>
+            <div>
+                <button on:click={() => applyFilter('grayscale')} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">Grayscale</button>
+                <button on:click={() => applyFilter('sepia')} class="bg-yellow-300 hover:bg-yellow-400 text-yellow-800 font-bold py-2 px-4 rounded">Sepia</button>
+            </div>
+        </div>
+    {/if}
 </div>
+
+
