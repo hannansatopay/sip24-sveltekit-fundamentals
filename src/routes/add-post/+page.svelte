@@ -22,8 +22,8 @@ let files = null;
     <input bind:files name="image" id="dropzone" type="file" accept="image/png, image/jpeg" class="hidden" required/>
 </label>
 <div>
-    <label for="Username" class="px-2 py-2 mb-2 mt-2 mx-2" >Username</label><br>
-    <input name="Username" id="Username" type="text" class="bg-gray-200 rounded px-2 py-2 mb-2 mt-2 mx-2 w-full">
+    <label for="username" class="px-2 py-2 mb-2 mt-2 mx-2" >Username</label><br>
+    <input name="username" type="text" class="bg-gray-200 rounded px-2 py-2 mb-2 mt-2 mx-2 w-full">
 </div>
 <div>
     <label for="content" class="px-2 py-2 mb-2 mt-2 mx-2">Content</label>
