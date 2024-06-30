@@ -24,7 +24,6 @@
             <div class="py-2 text-sm ">
                 <span class="font-bold ">{post.username}</span>
                 <span class="text-green-700 "> {post.content}</span>
-
             </div>
         </div>
         {/each}
