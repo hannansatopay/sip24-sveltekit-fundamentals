@@ -1,12 +1,12 @@
 <script>
     let posts = [
         {
-            username: "John Doe",
+            username: "Shristi ",
             content: "Wondeful World",
             image: "https://images.unsplash.com/25/puppy-love.jpg?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8YmxhY2slMjBwdXBweXxlbnwwfHx8fDE3MTk0NzgxMjV8MA&ixlib=rb-4.0.3"
         },
         {
-            username: "Jane Smith",
+            username: "kanak Smith",
             content: "Nature at its best",
             image: "https://picsum.photos/701"
         },
@@ -38,11 +38,16 @@
     }
 
     
+    import { onMount } from 'svelte';
+
+onMount(() => {
     window.addEventListener('message', (event) => {
         if (event.data.type === 'new-post') {
             addPost(event.data.post);
         }
     });
+});
+
 
     
     function likePost(event) {
