@@ -1,27 +1,36 @@
 <script>
-    export let data;
+    let url = '';
+    let links = [];
+    let error = '';
+
+    async function fetchLinks() {
+        try {
+            const response = await fetch(`http://localhost:3000/fetch-links?url=${encodeURIComponent(url)}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            links = await response.json();
+            error = "";
+        } catch (err) {
+            error = `Error: ${err.message}`;
+        }
+    }
 </script>
 
-<header class="bg-white py-4 shadow-md sticky top-0 z-10">
-    <div class="container mx-auto px-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold font-['Comic_Sans_MS']">Craftlab</h1>
-        <a class="bg-blue-500 hover:bg-blue-700 text-white font bold py-2 px-4 rounded" href="/add-post">Add Post</a>
-    </div>
-</header>
+<main>
+    <h1>Fetch Links from URL</h1>
+    <input type="text" bind:value={url} placeholder="Enter website URL" />
+    <button on:click={fetchLinks}>Fetch Links</button>
 
-<div>
-    <div class="container mx-auto md:my-5">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Post Template -->
-            {#each data.posts as post}
-                <div>
-                    <img class="w-full" src="data:image;base64,{post.image}" alt="Post" />
-                    <div class="text-sm py-2">
-                        <span class="font-bold">{post.username}</span>
-                        <span>{post.content}</span>
-                    </div>
-                </div>
+    {#if error}
+        <p style="color: red">{error}</p>
+    {/if}
+
+    {#if links.length > 0}
+        <ul>
+            {#each links as link}
+                <li><a href={link} target="_blank" rel="noopener noreferrer">{link}</a></li>
             {/each}
-        </div>
-    </div>
-</div>
+        </ul>
+    {/if}
+</main>
