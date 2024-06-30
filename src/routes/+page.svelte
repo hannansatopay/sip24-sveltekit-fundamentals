@@ -1,38 +1,33 @@
-<header class="bg-white py-4 shadow-md stricky top-0 z-10">
-    <div class =" container mx-auto px-4 flex justify-between items-center">
+<script>
+    let title="Finstagram"
+    export let data;
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
 
+</head>
+
+<header class="py-4 bg-white shadow-md ">
+    <div class="container flex items-center justify-between px-4 mx-auto">
+        <h1 class=" text-2xl font-bold font-['Comic_Sans_MS'] ">MyGram</h1>
+        <a href="/add-post" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Add post</a>
     </div>
-    <h1 class="text-2xl font-bold font-['Comic_Sans_MS]">
-        Craftlab
-    </h1>
-    <a href="/add-post" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add post</a>
 </header>
-
 <div class="container mx-auto md:my-5">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        {#each data.posts as post }
         <div>
-            <img class="w-full" src="https://th.bing.com/th/id/R.9bcf216ba66d755d01307dd6e62e58b4?rik=Jrd94WgAuN8Ohw&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2fc%2f7%2f1%2f460702.jpg&ehk=Nv7Yrbgxp8%2feoSXfYXHknPBkG%2bGt7Ytdwg%2bl0nYhpi0%3d&risl=&pid=ImgRaw&r=0" alt="Post">
-            <div class="text-sm py-2">
-                <span class="font-bold"> Username </span>
-                <span class="text-gray-700"> Lorem Ipsumer Doler Ismet Amet </span>
+            <img class="w-full " src="data:image;base64,{post.image}" alt="no-bro">
+            <div class="py-2 text-sm ">
+                <span class="font-bold ">{post.username}</span>
+                <span class="text-green-700 "> {post.content}</span>
+
             </div>
         </div>
-
-        <div>
-            <img class="w-full" src="https://th.bing.com/th/id/R.9bcf216ba66d755d01307dd6e62e58b4?rik=Jrd94WgAuN8Ohw&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2fc%2f7%2f1%2f460702.jpg&ehk=Nv7Yrbgxp8%2feoSXfYXHknPBkG%2bGt7Ytdwg%2bl0nYhpi0%3d&risl=&pid=ImgRaw&r=0" alt="Post">
-            <div class="text-sm py-2">
-                <span class="font-bold"> Username </span>
-                <span class="text-gray-700"> Lorem Ipsumer Doler Ismet Amet </span>
-            </div>
-        </div>
-
-        <div>
-            <img class="w-full" src="https://th.bing.com/th/id/R.9bcf216ba66d755d01307dd6e62e58b4?rik=Jrd94WgAuN8Ohw&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2fc%2f7%2f1%2f460702.jpg&ehk=Nv7Yrbgxp8%2feoSXfYXHknPBkG%2bGt7Ytdwg%2bl0nYhpi0%3d&risl=&pid=ImgRaw&r=0" alt="Post">
-            <div class="text-sm py-2">
-                <span class="font-bold"> Username </span>
-                <span class="text-gray-700"> Lorem Ipsumer Doler Ismet Amet </span>
-            </div>
-        </div>
-
+        {/each}
+        
     </div>
 </div>
