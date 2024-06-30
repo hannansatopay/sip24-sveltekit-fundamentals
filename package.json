@@ -17,13 +17,11 @@
 		"tailwindcss": "^3.4.4",
 		"vite": "^5.0.3"
 	},
-<<<<<<< HEAD
+
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^5.16.0",
 		"prisma": "^5.16.0"
 	}
-=======
-	"type": "module"
->>>>>>> d114752ec110ecc05bf78e952ea13dd8d22085ec
+
 }
