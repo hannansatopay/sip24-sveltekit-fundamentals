@@ -1,1 +1,5 @@
-<h1>Welcome to Summer Internship 2024</h1>
+<script>
+    import Feed from '../components/Feed.svelte';
+  </script>
+  
+  <Feed />
