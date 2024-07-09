@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*{
+    background-color: rgb(31, 31, 31);
+}
+
+.head{
+    background-color: rgb(18, 18, 18);
+}
+
+.cube{
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+    color: rgb(240, 231, 215);
+}
+.canvas-container{
+    position: relative;
+}
