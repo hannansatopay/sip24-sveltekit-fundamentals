@@ -1,3 +1,6 @@
+Done BY Aman Singh , main plus bonus task
+
+
 We are excited to welcome you to the SvelteKit Fundamentals course, a key part of the Summer Internship Program 2024. In this tutorial, you'll learn the basics of SvelteKit by building an Instagram clone.
 
 ## How to Contribute
