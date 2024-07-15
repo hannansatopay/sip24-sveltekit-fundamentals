@@ -5,7 +5,9 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"postinstall": "prisma generate",
+		"migrate:deploy": "prisma migrate deploy"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -17,5 +19,13 @@
 		"tailwindcss": "^3.4.4",
 		"vite": "^5.0.3"
 	},
-	"type": "module"
+	"engines": {
+		"node": ">=14"
+	},
+	"type": "module",
+	"dependencies": {
+		"@prisma/client": "^5.16.2",
+		"@sveltejs/adapter-vercel": "^5.4.1",
+		"prisma": "^5.16.2"
+	}
 }
