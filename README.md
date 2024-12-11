@@ -1,3 +1,11 @@
+## Description of the project
+- Developed as part of Summer Internship Program offered by Craftlab.
+- The application provides the ability to add new image posts along with the username and content to share.
+- Also provides the ability to apply Grayscale and Sepia filters to the image before sharing it.
+- Makes use of HTML5 canvas to apply the selected filter and present it.
+- Uses Prisma as the ORM for migrations and querying and SQLite as the database.
+
+## Introduction
 We are excited to welcome you to the SvelteKit Fundamentals course, a key part of the Summer Internship Program 2024. In this tutorial, you'll learn the basics of SvelteKit by building an Instagram clone.
 
 ## How to Contribute
